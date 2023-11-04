@@ -18,7 +18,7 @@ public class JavaFXSGACP extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLMenuPrincipal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLMenuPrincipal.fxml"));
         
         Scene scene = new Scene(root);
         
