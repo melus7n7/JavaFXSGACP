@@ -21,7 +21,7 @@
                         <Font name="Futura Bk BT Book" size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="42.0" layoutY="31.0" prefHeight="31.0" prefWidth="299.0" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="344.0">
+                  <ComboBox fx:id="cmbBoxTiposRegistro" layoutX="42.0" layoutY="31.0" prefHeight="31.0" prefWidth="299.0" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="344.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
