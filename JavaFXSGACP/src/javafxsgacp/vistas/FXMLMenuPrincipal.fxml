@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="1024.0" styleClass="bodyMenu" stylesheets="@../estilos/EstiloMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxsgacp.controladores.FXMLMenuPrincipalController">
+    <children>
+      <AnchorPane prefHeight="240.0" prefWidth="1024.0" style="-fx-background-color: #034f75;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="614.0" prefHeight="240.0" prefWidth="410.0" style="-fx-background-color: #c9eeff;" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" layoutX="22.0" layoutY="143.0" prefHeight="76.0" prefWidth="366.0" text="NOMBRE NOMBRE NOMBRE NOMBRE NOMBRE" textAlignment="RIGHT" textFill="#034f75" wrapText="true" AnchorPane.rightAnchor="22.0">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <Label layoutX="161.0" layoutY="30.0" prefHeight="181.0" prefWidth="418.0" text="Sistema de Generación de Constancias" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="445.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="45.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="681.0" layoutY="116.0" prefHeight="31.0" prefWidth="313.0" text="Personal Administrativo:" textFill="#034f75" wrapText="true" AnchorPane.rightAnchor="22.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="87.0" fitWidth="65.0" layoutX="925.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="34.0">
+               <image>
+                  <Image url="@../recursos/uv.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="84.0" fitWidth="65.0" layoutX="831.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="135.0">
+               <image>
+                  <Image url="@../recursos/fei.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="135.0" fitWidth="146.0" layoutX="14.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0">
+               <image>
+                  <Image url="@../recursos/contract.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="668.0" layoutY="281.0" prefHeight="112.0" prefWidth="313.0" style="-fx-background-color: #9C92A3; -fx-background-radius: 25;" AnchorPane.leftAnchor="668.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="281.0">
+         <children>
+            <ImageView fitHeight="84.0" fitWidth="75.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/contrato.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="89.0" layoutY="18.0" prefHeight="76.0" prefWidth="213.0" text="Historial Constancias" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="11.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutX="39.0" layoutY="274.0" prefHeight="254.0" prefWidth="269.0" style="-fx-background-color: #034F75; -fx-background-radius: 25;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="274.0">
+         <children>
+            <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="73.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="106.0" AnchorPane.topAnchor="24.0">
+               <image>
+                  <Image url="@../recursos/register.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="28.0" layoutY="164.0" prefHeight="76.0" prefWidth="213.0" text="Registrar docente" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="164.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutX="349.0" layoutY="274.0" prefHeight="254.0" prefWidth="269.0" style="-fx-background-color: #07004D; -fx-background-radius: 25;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="274.0">
+         <children>
+            <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="73.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="108.0" AnchorPane.topAnchor="22.0">
+               <image>
+                  <Image url="@../recursos/trabajo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="18.0" layoutY="164.0" prefHeight="76.0" prefWidth="234.0" text="Registrar trabajo docente" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="164.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutX="668.0" layoutY="408.0" prefHeight="112.0" prefWidth="313.0" style="-fx-background-color: #c9eeff; -fx-background-radius: 25;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="668.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="408.0">
+         <children>
+            <Label alignment="CENTER" layoutX="89.0" layoutY="18.0" prefHeight="76.0" prefWidth="213.0" text="Docentes" textAlignment="CENTER" textFill="#034f75" wrapText="true" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="18.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="30.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="68.0" prefWidth="69.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <ImageView fitHeight="84.0" fitWidth="75.0" layoutX="6.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/profesores.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutX="890.0" layoutY="537.0" onMouseClicked="#clickGenerarConstancia" prefHeight="34.0" prefWidth="130.0" style="-fx-background-color: #BA1200; -fx-background-radius: 25;" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
+         <children>
+            <Label alignment="CENTER" layoutX="46.0" prefHeight="35.0" prefWidth="65.0" text="Salir" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="11.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="11.0">
+               <image>
+                  <Image url="@../recursos/log-out.png" />
+               </image>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+    </children>
+</AnchorPane>

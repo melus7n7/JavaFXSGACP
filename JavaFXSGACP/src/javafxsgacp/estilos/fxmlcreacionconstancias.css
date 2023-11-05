@@ -1,0 +1,79 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+* {
+	-fx-primary-color: #034f75;
+	-fx-secondary-color: #03173b;
+	-fx-grey-color:  #eef8fd;
+        -fx-light-grey-color:  #eef8fd;
+        -fx-focus-color: -fx-secondary-color;
+}
+
+.combo-box-base {
+    -fx-font-family:"Futura Bk BT";
+    -fx-font-size:14px;
+	-fx-background-color: -fx-primary-color;
+	-fx-background-radius: 10;
+    -fx-foregroud: white;
+    
+}
+.combo-box-base:hover {
+	-fx-background-color: -fx-secondary-color;
+}
+.combo-box-base:disabled {
+	-fx-background-color: -fx-grey-color;
+}
+.combo-box .list-cell {
+    -fx-padding: 0 0 0 7;
+	-fx-text-fill: #eef8fd;
+}
+.combo-box-base .arrow-button .arrow {
+	-fx-background-color: white;
+}
+.combo-box-base:showing {
+	-fx-background-color: -fx-secondary-color;
+}
+.combo-box-popup .list-view 
+{
+    -fx-background-color: #034f75;
+} 
+.combo-box .combo-box-popup .list-view .list-cell {
+	-fx-background-color: -fx-primary-color;
+}
+.combo-box .combo-box-popup .list-view .list-cell:hover,
+.combo-box .combo-box-popup .list-view .list-cell:selected {
+	-fx-background-color: -fx-secondary-color;
+}
+
+.body1{
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.radio-button .radio {
+     -fx-border-width: 3px;
+     -fx-border-color: #034f75;
+     -fx-background-color: white;
+     -fx-background-image: null;
+     -fx-border-radius: 15px;
+     -fx-padding: 3px;
+ }
+ .radio-button .radio:selected {
+     -fx-background-color: white;
+     -fx-background-image: null;
+ }
+ .radio-button -radio:armed {
+     -fx-background-color: white;
+     -fx-background-image: null;
+ }
+ .radio-button -radio:determinate {
+     -fx-background-color: white;
+     -fx-background-image: null;
+ }
+ .radio-button .dot {
+     -fx-background-radius: 15px;
+     -fx-padding: 8px;
+     -fx-mark-color: #034f75 ;
+ }
