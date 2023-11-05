@@ -10,16 +10,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
  * @author sulem
  */
 public class FXMLMenuPrincipalController implements Initializable {
+
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clickGenerarConstancia(MouseEvent event) {
+        //Ir Inicio Sesion
+    }
+
+
     
 }

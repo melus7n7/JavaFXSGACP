@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafxsgacp.JavaFXSGACP;
 
@@ -22,35 +23,34 @@ import javafxsgacp.JavaFXSGACP;
  *
  * @author sulem
  */
-public class FXMLMenuPrincipalDocentesController implements Initializable {
+public class FXMLCreacionConstanciasController implements Initializable {
 
     @FXML
     private Label lblNombreDocente;
+    @FXML
+    private AnchorPane ancPaneInformacionConstancia;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+        ancPaneInformacionConstancia.setVisible(false);
+    }
     @FXML
-    private void clickGenerarConstancia(MouseEvent event) {
+    private void clickRegresarMenu(MouseEvent event) {
         Stage escenarioBase = (Stage) lblNombreDocente.getScene().getWindow();
         try {
-            FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLCreacionConstancias.fxml"));
+            FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLMenuPrincipalDocentes.fxml"));
             Parent vista = accesoControlador.load();
-            FXMLCreacionConstanciasController creacionConstancias = accesoControlador.getController();
+            FXMLMenuPrincipalDocentesController menuDocentes = accesoControlador.getController();
             
             escenarioBase.setScene(new Scene (vista));
-            escenarioBase.setTitle("Generación Constancias");
+            escenarioBase.setTitle("Menú Principal Docentes");
             escenarioBase.show();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    @FXML
-    private void clickSalir(MouseEvent event) {
-        //Ir Inicio Sesion
-    }
+    }    
     
 }

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" style="-fx-background-color: #197278;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxsgacp.controladores.FXMLCreacionConstanciasController">
+   <children>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="690.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="334.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutY="90.0" prefHeight="109.0" prefWidth="685.0" style="-fx-background-color: #c9eeff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="20.0" layoutY="5.0" prefHeight="13.0" prefWidth="105.0" text="Tipo Registro:" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="Futura Bk BT Book" size="16.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="42.0" layoutY="31.0" prefHeight="31.0" prefWidth="299.0" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="344.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <RadioButton contentDisplay="RIGHT" layoutX="58.0" layoutY="70.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="267.0" stylesheets="@../estilos/fxmlcreacionconstancias.css" text="Mostrar Trabajos Con Constancias" wrapText="true" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="360.0">
+                     <font>
+                        <Font name="Futura Bk BT Book" size="15.0" />
+                     </font>
+                  </RadioButton>
+                  <DatePicker layoutX="496.0" layoutY="35.0" prefHeight="25.0" prefWidth="159.0" stylesheets="@../estilos/EstiloDatePicker.css" AnchorPane.rightAnchor="28.0" />
+                  <Label alignment="CENTER" layoutX="413.0" layoutY="8.0" prefHeight="20.0" prefWidth="204.0" text="Fecha en la que se registró:" AnchorPane.rightAnchor="68.0">
+                     <font>
+                        <Font name="Futura Bk BT Book" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="373.0" layoutY="39.0" prefHeight="18.0" prefWidth="105.0" text="Desde la fecha:" AnchorPane.rightAnchor="207.0">
+                     <font>
+                        <Font name="Futura Bk BT Book" size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="496.0" layoutY="73.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../estilos/EstiloDatePicker.css" AnchorPane.rightAnchor="28.0" />
+                  <Label alignment="CENTER" layoutX="373.0" layoutY="77.0" prefHeight="18.0" prefWidth="105.0" text="Hasta la fecha:" AnchorPane.rightAnchor="207.0">
+                     <font>
+                        <Font name="Futura Bk BT Book" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="35.0" layoutY="207.0" prefHeight="353.0" prefWidth="615.0" style="-fx-background-color: #bacfe8; -fx-border-color: #172457; -fx-border-width: 3; -fx-border-radius: 5;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="207.0">
+               <content>
+                  <VBox prefHeight="349.0" prefWidth="594.0" style="-fx-background-color: #bacfe8;">
+                     <children>
+                        <AnchorPane prefHeight="142.0" prefWidth="594.0" style="-fx-background-color: #90b4e0; -fx-border-color: #034f75; -fx-border-width: 3; -fx-border-radius: 10;" VBox.vgrow="NEVER">
+                           <children>
+                              <Ellipse fill="#172457" layoutX="27.0" layoutY="20.0" radiusX="8.0" radiusY="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="19.0" />
+                              <Label layoutX="46.0" layoutY="13.0" text="Registro de Impartir Experiencia Educativa" AnchorPane.leftAnchor="46.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="23.0" layoutY="41.0" text="Programa Educativo:" AnchorPane.leftAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="173.0" layoutY="40.0" prefHeight="15.0" prefWidth="401.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 20 0 20;" text="Ingeniería de Software" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="23.0" layoutY="67.0" text="Experiencia Educativa:" AnchorPane.leftAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="173.0" layoutY="66.0" prefHeight="19.0" prefWidth="398.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 20 0 20;" text="Principios de Diseño" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="29.0" layoutY="96.0" prefHeight="23.0" prefWidth="65.0" text="Periodo:" AnchorPane.leftAnchor="26.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="88.0" layoutY="93.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 10 0 10;" text="Agosto 2023 - Enero 2024" AnchorPane.leftAnchor="85.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="284.0" layoutY="95.0" prefHeight="20.0" prefWidth="110.0" text="Bloque y Sección:" AnchorPane.rightAnchor="203.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="396.0" layoutY="93.0" prefHeight="25.0" prefWidth="175.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 10 0 10;" text="Bloque 2 - Sección 1" AnchorPane.rightAnchor="26.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="372.0" layoutY="13.0" prefHeight="15.0" prefWidth="102.0" text="Fecha Registro:" AnchorPane.rightAnchor="120.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="483.0" layoutY="13.0" prefHeight="15.0" prefWidth="98.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 10 0 10;" text="02/03/2023" AnchorPane.rightAnchor="20.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="481.0" layoutY="121.0" prefHeight="15.0" prefWidth="85.0" text="Con Constancia" AnchorPane.rightAnchor="28.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book Italic" size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="142.0" prefWidth="594.0" style="-fx-background-color: #bacfe8; -fx-border-color: #034f75; -fx-border-width: 3; -fx-border-radius: 10;">
+                           <children>
+                              <Ellipse fill="#172457" layoutX="27.0" layoutY="20.0" radiusX="8.0" radiusY="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="19.0" />
+                              <Label layoutX="46.0" layoutY="13.0" text="Registro de Impartir Experiencia Educativa" AnchorPane.leftAnchor="46.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="23.0" layoutY="41.0" text="Programa Educativo:" AnchorPane.leftAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="173.0" layoutY="40.0" prefHeight="15.0" prefWidth="401.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 20 0 20;" text="Ingeniería de Software" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="23.0" layoutY="67.0" text="Experiencia Educativa:" AnchorPane.leftAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="173.0" layoutY="66.0" prefHeight="19.0" prefWidth="398.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 20 0 20;" text="Principios de Diseño" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="23.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="29.0" layoutY="96.0" prefHeight="23.0" prefWidth="65.0" text="Periodo:" AnchorPane.leftAnchor="26.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="88.0" layoutY="93.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 10 0 10;" text="Agosto 2023 - Enero 2024" AnchorPane.leftAnchor="85.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="284.0" layoutY="95.0" prefHeight="20.0" prefWidth="110.0" text="Bloque y Sección:" AnchorPane.rightAnchor="203.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="396.0" layoutY="93.0" prefHeight="25.0" prefWidth="175.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 10 0 10;" text="Bloque 2 - Sección 1" AnchorPane.rightAnchor="26.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="372.0" layoutY="13.0" prefHeight="15.0" prefWidth="102.0" text="Fecha Registro:" AnchorPane.rightAnchor="120.0">
+                                 <font>
+                                    <Font name="Futura Md BT Bold" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="483.0" layoutY="13.0" prefHeight="15.0" prefWidth="98.0" style="-fx-background-color: #EDFFFF; -fx-background-radius: 10; -fx-padding: 0 10 0 10;" text="02/03/2023" AnchorPane.rightAnchor="20.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="481.0" layoutY="121.0" prefHeight="15.0" prefWidth="85.0" text="Sin Constancia" AnchorPane.rightAnchor="31.0">
+                                 <font>
+                                    <Font name="Futura Bk BT Book Italic" size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <AnchorPane prefHeight="90.0" prefWidth="685.0" style="-fx-background-color: #034f75;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="39.0" prefWidth="544.0" text="Trabajos Registrados del Docente" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="70.0">
+                     <font>
+                        <Font name="Futura Md BT Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblNombreDocente" alignment="CENTER" layoutX="6.0" layoutY="58.0" prefHeight="23.0" prefWidth="258.0" text="Docente: ERIKA MENESES RICO" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Futura Md BT Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="22.0" layoutY="12.0" onMouseClicked="#clickRegresarMenu" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/log-out.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="690.0" prefHeight="576.0" prefWidth="9.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="ancPaneInformacionConstancia" focusTraversable="true" layoutX="722.0" layoutY="1.0" minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="326.0" style="-fx-background-color: #c9eeff;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="90.0" prefWidth="331.0" style="-fx-background-color: #034f75;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="37.0" layoutY="-1.0" prefHeight="31.0" prefWidth="258.0" text="Información Constancia" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="-1.0">
+                     <font>
+                        <Font name="Futura Md BT Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="24.0" layoutY="27.0" prefHeight="51.0" prefWidth="284.0" text="Constancia por Impartir una Experiencia Educativa" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="27.0">
+                     <font>
+                        <Font name="Futura Md BT Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="16.0" layoutY="439.0" minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="299.0" style="-fx-border-color: #034f75; -fx-border-width: 3; -fx-border-radius: 10;" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="81.0" layoutY="8.0" prefHeight="51.0" prefWidth="204.0" text="ConstanciaImpartirEE 28/10/2023.PDF" wrapText="true" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+                     <font>
+                        <Font name="Futura Bk BT Book" size="18.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="51.0" prefWidth="46.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 10;" styleClass="body1" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="21.0" layoutY="354.0" prefHeight="23.0" prefWidth="214.0" text="Fecha de Expedición: " textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="21.0">
+               <font>
+                  <Font name="Futura Md BT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="48.0" layoutY="377.0" prefHeight="25.0" prefWidth="235.0" text="28 de septiembre del 2023" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0">
+               <font>
+                  <Font name="Futura Bk BT Book" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="104.0" prefHeight="23.0" prefWidth="233.0" text="Formato para la Constancia:" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="104.0">
+               <font>
+                  <Font name="Futura Md BT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="78.0" layoutY="521.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #08a141; -fx-background-radius: 15;" text="Descargar" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="78.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Futura Md BT Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="21.0" layoutY="406.0" prefHeight="25.0" prefWidth="214.0" text="Archivo de la constancia:" AnchorPane.bottomAnchor="143.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="96.0">
+               <font>
+                  <Font name="Futura Md BT Bold" size="16.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="12.0" layoutY="133.0" prefHeight="217.0" prefWidth="308.0" styleClass="body1" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="133.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
