@@ -64,9 +64,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane layoutX="39.0" layoutY="274.0" prefHeight="254.0" prefWidth="269.0" style="-fx-background-color: #034F75; -fx-background-radius: 25;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="274.0">
+      <AnchorPane layoutX="39.0" layoutY="274.0" onMouseClicked="#clicIrRegistrarDocente" prefHeight="254.0" prefWidth="269.0" style="-fx-background-color: #034F75; -fx-background-radius: 25;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="274.0">
          <children>
-            <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="73.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="106.0" AnchorPane.topAnchor="24.0">
+            <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="73.0" layoutY="24.0" onMouseClicked="#clicIrRegistrarDocente" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="106.0" AnchorPane.topAnchor="24.0">
                <image>
                   <Image url="@../recursos/register.png" />
                </image>
