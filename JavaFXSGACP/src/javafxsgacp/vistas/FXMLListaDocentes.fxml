@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxsgacp.controladores.FXMLListaDocentesController">
+   <children>
+      <Pane prefHeight="524.0" prefWidth="1024.0">
+         <children>
+            <ListView fx:id="lstViewLista" layoutX="50.0" layoutY="95.0" prefHeight="370.0" prefWidth="924.0" />
+            <AnchorPane layoutY="-7.0" prefHeight="76.0" prefWidth="1024.0" style="-fx-background-color: #034f75;">
+               <children>
+                  <Label fx:id="lblTitulo" alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="39.0" prefWidth="544.0" text="Lista Docentes" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="70.0">
+                     <font>
+                        <Font name="Futura Md BT Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="22.0" layoutY="17.0" onMouseClicked="#clickRegresarMenu" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@../recursos/log-out.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
