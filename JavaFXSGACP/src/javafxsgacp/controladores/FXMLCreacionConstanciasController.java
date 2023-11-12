@@ -5,6 +5,8 @@
 package javafxsgacp.controladores;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import javafxsgacp.JavaFXSGACP;
@@ -249,11 +253,8 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         nchPaneFormatoConstancia.getStyleClass().add("constanciaEE");
             
         if(trabajoActual.getFechaExpedicionConstancia() != null){
-            String nombreConstancia = "CONSTANCIA-" + trabajoActual.getTipoTrabajo().getNombreTrabajo() + "-" +
-                    trabajoActual.getFechaExpedicionConstancia();
-            
             lblFechaExpedicion.setText(trabajoActual.getFechaExpedicionConstancia().toString());
-            lblNombreConstancia.setText(nombreConstancia);
+            lblNombreConstancia.setText(nombreArchivoConstancia());
             
             nchPaneArchivoPDF.getStyleClass().clear();
             nchPaneArchivoPDF.getStylesheets().add(cssArchivo);
@@ -292,18 +293,78 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         if(trabajoEE != null && trabajoEE.getFechaExpedicionConstancia() == null){
             generarConstanciaEE(trabajoEE);
         }else{
-            descargarConstancia();
+            recuperarConstancia();
         }
     }
     
     private void generarConstanciaEE(ImparticionExperienciaEducativa trabajoEE){
-        Constancia.generarConstanciaImpartirEE(trabajoEE, docente);
-        System.out.println(trabajoEE.getExperienciaEducativa().getNombre());
+        byte[] archivoConstancia = Constancia.generarConstanciaImpartirEE(trabajoEE, docente);
+        if(archivoConstancia != null){
+            guardarConstanciaBD(archivoConstancia);
+        }else{
+            Utilidades.mostrarDialogoSimple("Error al generar la constancia", "No se ha podido generar correctamente,"
+                    + " inténtelo más tarde", 
+                    Alert.AlertType.ERROR);
+        }
+    }
+    private void guardarConstanciaBD(byte[] archivo){
+        Constantes respuesta = TrabajoDocenteDAO.guardarArchivoConstancia(archivo, trabajoActual.getIdTrabajoDocente());
+        switch(respuesta){
+            case OPERACION_EXITOSA:
+                Utilidades.mostrarDialogoSimple("Constancia Generada y Guardada", "La constancia de "
+                    +  trabajoActual.getTipoTrabajo().getNombreTrabajo() + " ha sido generada correctamente", 
+                    Alert.AlertType.INFORMATION);
+                break;
+            case OPERACION_VACIA:
+                Utilidades.mostrarDialogoSimple("Error al guardar la constancia", "No se ha podido guardar "
+                        + " en la base de datos correctamente", 
+                    Alert.AlertType.WARNING);
+                break;
+            case ERROR_CONEXION_BD:
+            case ERROR_CONSULTA:
+                Utilidades.mostrarDialogoSimple("Error con la base de datos", "Hubo un error con la conexión de la base de datos", 
+                    Alert.AlertType.ERROR);
+        }
     }
     
-    private void descargarConstancia(){
-        String ruta = javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
-        Utilidades.mostrarDialogoSimple("Constancia descargada", "Se descargó el reporte en la ruta "+ruta, Alert.AlertType.INFORMATION);
+    private void recuperarConstancia(){
+        Pair<Constantes, byte[]> respuestaConsulta = TrabajoDocenteDAO.recuperarArchivoConstancia(trabajoActual.getIdTrabajoDocente());
+        Constantes respuesta = respuestaConsulta.getKey();
+        byte[] archivoConstancia = respuestaConsulta.getValue();
+        switch(respuesta){
+            case OPERACION_EXITOSA:
+                descargarConstancia(archivoConstancia);
+                break;
+            case OPERACION_VACIA:
+                Utilidades.mostrarDialogoSimple("Constancia no encontrada", "No se encontró la constancia", Alert.AlertType.WARNING);
+                break;
+            case ERROR_CONEXION_BD:
+            case ERROR_CONSULTA:
+                Utilidades.mostrarDialogoSimple("Error con la base de datos", "Hubo un error con la conexión de la base de datos", 
+                    Alert.AlertType.ERROR);
+        }
+    }
+    //NUIOSDENBUITNOB
+    private void descargarConstancia(byte[] constancia){
+        DirectoryChooser dialogoSeleccionDireccion = new DirectoryChooser();
+        dialogoSeleccionDireccion.setTitle("Seleccione la carpeta para descargar el documento");
+        Stage escenarioBase = (Stage)lblNombreDocente.getScene().getWindow();
+        File direccionElegida = dialogoSeleccionDireccion.showDialog(escenarioBase);
+        
+        if(direccionElegida != null){
+            try (FileOutputStream stream = new FileOutputStream(direccionElegida + "/" + nombreArchivoConstancia() + ".pdf")) {
+                stream.write(constancia);
+                stream.close();
+                Utilidades.mostrarDialogoSimple("Constancia descargada", "Se descargó la constancia en la ruta "+ direccionElegida, Alert.AlertType.INFORMATION);
+            }catch(IOException e){
+                System.out.println(e);
+                Utilidades.mostrarDialogoSimple("Error al descargar constancia", "Ocurrió un error al descargar la constancia", Alert.AlertType.ERROR);
+            }
+        }
     }
     
+    private String nombreArchivoConstancia(){
+        return "CONSTANCIA-" + trabajoActual.getTipoTrabajo().getNombreTrabajo() + "-" +
+                    trabajoActual.getFechaExpedicionConstancia();
+    }
 }

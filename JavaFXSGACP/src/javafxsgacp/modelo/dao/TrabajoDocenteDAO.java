@@ -109,4 +109,58 @@ public class TrabajoDocenteDAO {
         }
         return new Pair<>(respuesta, listaTrabajos);
     }
+    
+    public static Pair<Constantes, byte[]> recuperarArchivoConstancia(int idTrabajoDocente){
+        Constantes respuesta;
+        byte[] constancia;
+        Connection conexionBD = ConexionBD.abrirConexionBD();
+        if(conexionBD != null){
+            try{
+                String consulta = "SELECT archivoConstancia FROM trabajodocente WHERE idTrabajoDocente = ?";
+                PreparedStatement prepararSentencia = conexionBD.prepareStatement(consulta);
+                prepararSentencia.setInt(1, idTrabajoDocente);
+                ResultSet resultado = prepararSentencia.executeQuery();
+                
+                if(resultado.next()){
+                    constancia = resultado.getBytes("archivoConstancia");
+                    respuesta = Constantes.OPERACION_EXITOSA;
+                }else{
+                    constancia = null;
+                    respuesta = Constantes.OPERACION_VACIA;
+                }
+                conexionBD.close();
+            }catch(SQLException e){
+                System.out.println(e);
+                respuesta = Constantes.ERROR_CONSULTA;
+                constancia = null;
+            }
+        }else{
+            respuesta = Constantes.ERROR_CONEXION_BD;
+            constancia = null;
+        }
+        return new Pair<>(respuesta, constancia);
+    }
+    
+    public static Constantes guardarArchivoConstancia(byte[] archivo, int idTrabajoDocente){
+        Constantes respuesta;
+        Connection conexionBD = ConexionBD.abrirConexionBD();
+        if(conexionBD != null){
+            try{
+                String sentencia = "UPDATE TrabajoDocente SET fechaConstancia = current_date(), archivoConstancia = ? "
+                        + "WHERE idTrabajoDocente = ?";
+                PreparedStatement prepararSentencia = conexionBD.prepareStatement(sentencia);
+                prepararSentencia.setBytes(1, archivo);
+                prepararSentencia.setInt(2, idTrabajoDocente);
+                int filasAfectadas = prepararSentencia.executeUpdate();
+                respuesta = (filasAfectadas <= 0) ? Constantes.OPERACION_VACIA : Constantes.OPERACION_EXITOSA;
+                conexionBD.close();
+            }catch (SQLException e){
+                respuesta = Constantes.ERROR_CONSULTA;
+                e.printStackTrace();
+            }
+        }else{
+            respuesta = Constantes.ERROR_CONEXION_BD;
+        }
+        return respuesta;
+    }
 }

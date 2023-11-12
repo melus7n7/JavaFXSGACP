@@ -17,8 +17,10 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.codec.PngImage;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Base64;
 import static javafx.scene.AccessibleAttribute.FONT;
 import javafx.scene.control.Alert;
@@ -36,14 +38,16 @@ import javafxsgacp.modelo.pojo.Usuario;
  * @author sulem
  */
 public class Constancia {
-    public static void generarConstanciaImpartirEE(ImparticionExperienciaEducativa trabajo, Usuario docente){
+    public static byte[] generarConstanciaImpartirEE(ImparticionExperienciaEducativa trabajo, Usuario docente){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Document documento = new Document();
         String ruta = javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
         
         try {
             String nombreArchivo = "CONSTANCIA-" + trabajo.getTipoTrabajo().getNombreTrabajo() + "-" +
                     trabajo.getFechaExpedicionConstancia() + ".pdf";
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/" + nombreArchivo));
+            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/" + nombreArchivo));
+            PdfWriter.getInstance(documento, byteArrayOutputStream);
             documento.setMargins(80, 80, 40, 40);
             documento.open();
             
@@ -186,18 +190,15 @@ public class Constancia {
                 imagenFirma.scaleAbsolute(80, 80);
                 imagenFirma.setAlignment(Element.ALIGN_CENTER);
                 documento.add(imagenFirma);
-            }catch(Exception e){
+            }catch(DocumentException | IOException e){
                 System.out.println(e);
             }
             
             documento.close();
-            
-            Utilidades.mostrarDialogoSimple("Documento descargado", "Se descargó el reporte en la ruta "+ruta, Alert.AlertType.INFORMATION);
-            
-        } catch (FileNotFoundException | DocumentException ex) {
+        } catch (DocumentException ex) {
             ex.printStackTrace();
         }
-        
+        return byteArrayOutputStream.toByteArray();
     }
     
     private static String recuperarBloqueSeccionCreditos(ExperienciaEducativa experienciaEducativa){
