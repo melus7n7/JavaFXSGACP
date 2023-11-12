@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxsgacp.controladores.FXMLInicioSesionController">
+   <children>
+      <Pane prefHeight="524.0" prefWidth="512.0">
+         <children>
+            <ImageView fitHeight="451.0" fitWidth="358.0" layoutX="74.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/uv.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="512.0" prefHeight="524.0" prefWidth="512.0">
+         <children>
+            <Label layoutX="67.0" layoutY="160.0" text="Correo Electronico:">
+               <font>
+                  <Font name="Segoe UI" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="67.0" layoutY="279.0" text="Contraseña:">
+               <font>
+                  <Font name="Segoe UI" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtFieldCorreoElectronico" layoutX="67.0" layoutY="205.0" prefHeight="45.0" prefWidth="400.0">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtFieldContraseña" layoutX="67.0" layoutY="317.0" prefHeight="45.0" prefWidth="400.0">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </TextField>
+            <Button layoutX="81.0" layoutY="432.0" mnemonicParsing="false" onMouseClicked="#clicContinuar" prefHeight="45.0" prefWidth="148.0" style="-fx-background-radius: 10; -fx-background-color: #08D171;" text="Continuar" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="299.0" layoutY="432.0" mnemonicParsing="false" onMouseClicked="#clicSalir" prefHeight="45.0" prefWidth="148.0" style="-fx-background-radius: 10; -fx-background-color: #BA1200;" text="Salir" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="135.0" layoutY="65.0" text="INICIO SESIÓN">
+               <font>
+                  <Font name="Segoe UI Semibold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="40.0" prefWidth="1024.0" style="-fx-background-color: #034f75;" />
+   </children>
+</AnchorPane>
