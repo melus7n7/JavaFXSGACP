@@ -54,10 +54,10 @@ public class FXMLTrabajoDocenteImpartirEEController implements Initializable {
     public void inicializarTrabajoEE(ImparticionExperienciaEducativa trabajo, INotificacionTrabajoDocenteDatosConstancia notificacion, boolean estaSeleccionado){
         this.trabajo = trabajo;
         this.notificacion = notificacion;
+        cargarDatos();
         if(estaSeleccionado){
             nchPaneTrabajo.setStyle("-fx-background-color: #5084d0; -fx-border-color: #08a141; -fx-border-width: 3; -fx-border-radius: 10; -fx-background-radius: 10");
         }
-        cargarDatos();
     }
     
     public void establecerColorPorDefecto(){

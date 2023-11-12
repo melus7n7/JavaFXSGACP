@@ -213,11 +213,16 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         int altoVBox = 0;
         trabajosElementosEE = new ArrayList<>();
         vBoxListaTrabajos.getChildren().clear();
-        ancPaneInformacionConstancia.setVisible(false);
+        ancPaneInformacionConstancia.setVisible(trabajoActual != null);
+        
         for (int i=0; i<trabajosDocenteEE.size(); i++){
-            //ESTA MAL
             if(!mostrarTrabajosConConstancias && trabajosDocenteEE.get(i).getFechaExpedicionConstancia() != null){
-                if(trabajoActual != null && trabajoActual.getIdTrabajoDocente() != trabajosDocenteEE.get(i).getIdTrabajoDocente()){
+                if(trabajoActual == null){
+                    continue;
+                }
+                if(trabajoActual.getIdTrabajoDocente() == trabajosDocenteEE.get(i).getIdTrabajoDocente()){
+                    trabajoActual = trabajosDocenteEE.get(i);
+                }else{
                     continue;
                 }
             }
@@ -265,7 +270,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         nchPaneFormatoConstancia.getStyleClass().add("constanciaEE");
             
         if(trabajoActual.getFechaExpedicionConstancia() != null){
-            lblFechaExpedicion.setText(trabajoActual.getFechaExpedicionConstancia().toString());
+            lblFechaExpedicion.setText(Utilidades.formatoFechaEscrito(trabajoActual.getFechaExpedicionConstancia()));
             lblNombreConstancia.setText(nombreArchivoConstancia());
             
             nchPaneArchivoPDF.getStyleClass().clear();
@@ -327,6 +332,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
                     +  trabajoActual.getTipoTrabajo().getNombreTrabajo() + " ha sido generada correctamente", 
                     Alert.AlertType.INFORMATION);
                 recuperarTrabajosDocenteImpartirEE();
+                mostrarInformacionConstancia();
                 break;
             case OPERACION_VACIA:
                 Utilidades.mostrarDialogoSimple("Error al guardar la constancia", "No se ha podido guardar "

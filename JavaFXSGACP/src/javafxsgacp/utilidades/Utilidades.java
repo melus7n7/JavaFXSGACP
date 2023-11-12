@@ -6,6 +6,8 @@ package javafxsgacp.utilidades;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.fxml.FXMLLoader;
@@ -50,5 +52,14 @@ public class Utilidades {
             return false;
         }
     }
+    
+    public static String formatoFechaEscrito(Date fecha){
+        String pattern = "dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String patternDos = "MMMM yyyy";
+        SimpleDateFormat simpleDateFormatDos = new SimpleDateFormat(patternDos);
+        return simpleDateFormat.format(fecha) + " de " + simpleDateFormatDos.format(fecha);
+    }
+    
     
 }

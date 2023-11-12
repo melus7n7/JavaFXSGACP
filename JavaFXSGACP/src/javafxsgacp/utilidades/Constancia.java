@@ -21,7 +21,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 import static javafx.scene.AccessibleAttribute.FONT;
 import javafx.scene.control.Alert;
 import javafxsgacp.JavaFXSGACP;
@@ -147,9 +149,9 @@ public class Constancia {
             
             documento.add(tabla);
             
-            Chunk parteUnoFinal = new Chunk("A petición de la interesada  y para los fines legales que a la misma convenga, "
+            Chunk parteUnoFinal = new Chunk("A petición de la interesada y para los fines legales que a la misma convenga, "
                     + "se extiende la presente en la ciudad de Xalapa-Enríquez, Veracruz a los ", fuenteCuerpo);
-            Chunk parteFecha = new Chunk("11 de noviembre 2023", fuenteInicio);
+            Chunk parteFecha = new Chunk(recuperarFechaActual(), fuenteInicio);
             Paragraph parrafoFinal = new Paragraph(); 
             parrafoFinal.add(parteUnoFinal); 
             parrafoFinal.add(parteFecha);
@@ -215,6 +217,11 @@ public class Constancia {
     private static String recuperarNombre(Usuario docente){
         return docente.getNombre().toUpperCase() + " " + docente.getApellidoPaterno().toUpperCase() + " " +
                 docente.getApellidoMaterno().toUpperCase();
+    }
+    
+    private static String recuperarFechaActual(){
+        Date date = new Date();
+        return Utilidades.formatoFechaEscrito(date);
     }
     
 }

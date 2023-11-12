@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import javafxsgacp.modelo.dao.FirmaFacultadoDAO;
 import javafxsgacp.modelo.dao.TrabajoDocenteDAO;
 import javafxsgacp.modelo.pojo.TrabajoDocente;
 import javafxsgacp.modelo.pojo.Usuario;
+import javafxsgacp.utilidades.Utilidades;
 
 /**
  * FXML Controller class
