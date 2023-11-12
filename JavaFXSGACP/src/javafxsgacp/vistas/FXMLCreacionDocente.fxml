@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxsgacp.controladores.FXMLCreacionDocenteController">
+   <children>
+      <AnchorPane prefHeight="90.0" prefWidth="1024.0" style="-fx-background-color: #034f75;">
+         <children>
+            <Label alignment="CENTER" layoutX="71.0" layoutY="23.0" prefHeight="39.0" prefWidth="544.0" text="Registrar docente" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="70.0">
+               <font>
+                  <Font name="Futura Md BT Bold" size="30.0" />
+               </font>
+            </Label>
+            <Circle fill="WHITE" layoutX="95.0" layoutY="45.0" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fitHeight="91.0" fitWidth="71.0" layoutX="28.0" layoutY="-32.0" onMouseClicked="#clicRegresar" pickOnBounds="true" preserveRatio="true" x="32.0" y="42.0">
+               <image>
+                  <Image url="@../recursos/flechaRegresar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="154.0" layoutY="102.0" prefHeight="454.0" prefWidth="716.0" style="-fx-background-color: #c9eeff;">
+         <children>
+            <Label layoutX="42.0" layoutY="107.0" text="Nombre:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="251.0" layoutY="107.0" text="Apellido Paterno:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="464.0" layoutY="107.0" text="Apellido Materno:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNombre" layoutX="42.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. Erika" />
+            <Label layoutX="42.0" layoutY="39.0" text="Número de Personal:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNumPersonal" layoutX="42.0" layoutY="71.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. S21013830" />
+            <TextField fx:id="tfApellidoPaterno" layoutX="252.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. Meneses" />
+            <TextField fx:id="tfApellidoMaterno" layoutX="464.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. Rico" />
+            <Label layoutX="255.0" layoutY="39.0" text="Tipo de usuario:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="203.0" text="Fecha de nacimiento:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dpFechaNacimiento" layoutX="43.0" layoutY="235.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/EstiloDatePicker.css" />
+            <Label layoutX="292.0" layoutY="203.0" text="Firma digital:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="305.0" text="Correo Electrónico:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="252.0" layoutY="305.0" text="Correo Electrónico Alterno:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCorreoPrincipal" layoutX="43.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. ermeneses@uv.mx" />
+            <Label layoutX="464.0" layoutY="305.0" text="Contraseña:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCorreoAlterno" layoutX="251.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. menesesrico@uv.mx" />
+            <TextField fx:id="tfContrasenia" layoutX="464.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. asnv!#$#%45" />
+            <ComboBox fx:id="cbTipoUsuario" layoutX="255.0" layoutY="71.0" opacity="0.5" prefHeight="25.0" prefWidth="174.0" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/Estilo.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <Button layoutX="297.0" layoutY="396.0" mnemonicParsing="false" onAction="#clicGuardarRegistroDocente" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #034f75;" text="Guardar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Futura Md BT Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSeleccionarFirmaDigital" layoutX="277.0" layoutY="232.0" mnemonicParsing="false" onAction="#clicSeleccionarFirmaDigital" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: #034f75;" text="Seleccionar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Pane layoutX="464.0" layoutY="182.0" prefHeight="117.0" prefWidth="174.0" style="-fx-background-color: white;">
+               <children>
+                  <ImageView fx:id="imgFirmaDigital" fitHeight="117.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
