@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import javafxsgacp.JavaFXSGACP;
+import javafxsgacp.interfaces.INotificacionTrabajoDocenteDatosConstancia;
 import javafxsgacp.modelo.dao.TipoTrabajoDocenteDAO;
 import javafxsgacp.modelo.dao.TrabajoDocenteDAO;
 import javafxsgacp.modelo.pojo.ImparticionExperienciaEducativa;
@@ -41,11 +44,13 @@ import javafxsgacp.utilidades.Utilidades;
  *
  * @author sulem
  */
-public class FXMLCreacionConstanciasController implements Initializable {
+public class FXMLCreacionConstanciasController implements Initializable, INotificacionTrabajoDocenteDatosConstancia {
 
     private ObservableList<TipoTrabajoDocente> tiposTrabajoDocentes;
     private ArrayList<ImparticionExperienciaEducativa> trabajosDocenteEE;
+    private ArrayList<FXMLTrabajoDocenteImpartirEEController> trabajosElementosEE;
     private Usuario docente;
+    private TrabajoDocente trabajoActual;
     
     @FXML
     private Label lblNombreDocente;
@@ -57,6 +62,14 @@ public class FXMLCreacionConstanciasController implements Initializable {
     private VBox vBoxListaTrabajos;
     @FXML
     private ScrollPane scrPaneTrabajos;
+    @FXML
+    private Label lblNombreConstancia;
+    @FXML
+    private AnchorPane nchPaneArchivoPDF;
+    @FXML
+    private Label lblFechaExpedicion;
+    @FXML
+    private AnchorPane nchPaneFormatoConstancia;
 
     /**
      * Initializes the controller class.
@@ -65,11 +78,21 @@ public class FXMLCreacionConstanciasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ancPaneInformacionConstancia.setVisible(false);
         cargarTiposTrabajo();
+        cmbBoxTiposRegistro.valueProperty().addListener(new ChangeListener<TipoTrabajoDocente>(){
+            @Override
+            public void changed(ObservableValue<? extends TipoTrabajoDocente> observable, TipoTrabajoDocente oldValue, TipoTrabajoDocente newValue) {
+                if (newValue != null){
+                    trabajosDocenteEE = null;
+                    vBoxListaTrabajos.getChildren().clear();
+                    ancPaneInformacionConstancia.setVisible(false);
+                    cargarTrabajosDocente(newValue);
+                }
+            }
+        });
     }
     
     public void inicializarPantalla(Usuario docente){
         this.docente = docente;
-        recuperarTrabajosDocenteImpartirEE();
     }
     
     @FXML
@@ -107,6 +130,15 @@ public class FXMLCreacionConstanciasController implements Initializable {
         }
     }
     
+    private void cargarTrabajosDocente(TipoTrabajoDocente tipo){
+        switch (tipo.getNombreTrabajo()) {
+            case "Impartir Experiencia Educativa":
+                recuperarTrabajosDocenteImpartirEE();
+                break;
+            default:
+        }
+    }
+    
     private void recuperarTrabajosDocenteImpartirEE(){
         Pair<Constantes,ArrayList<ImparticionExperienciaEducativa>> respuesta = TrabajoDocenteDAO.recuperarTrabajosDocenteTipoImpartirEE(docente);
         Constantes respuestaConsulta = respuesta.getKey();
@@ -127,13 +159,16 @@ public class FXMLCreacionConstanciasController implements Initializable {
     
     private void cargarTrabajosDocenteImpartirEE(){
         int altoVBox = 0;
+        trabajosElementosEE = new ArrayList<>();
         for (int i=0; i<trabajosDocenteEE.size(); i++){
             FXMLLoader fmxlLoaderTrabajoEE = new FXMLLoader();
             fmxlLoaderTrabajoEE.setLocation(JavaFXSGACP.class.getResource("vistas/FXMLTrabajoDocenteImpartirEE.fxml"));
             try{
                 Pane pane = fmxlLoaderTrabajoEE.load();
                 FXMLTrabajoDocenteImpartirEEController elementoEnLista = fmxlLoaderTrabajoEE.getController();
-                elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i));
+                elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this);
+                trabajosElementosEE.add(elementoEnLista);
+                
                 altoVBox += pane.getPrefHeight();
                 vBoxListaTrabajos.setPrefHeight(altoVBox);
                 vBoxListaTrabajos.getChildren().add(pane);
@@ -144,6 +179,38 @@ public class FXMLCreacionConstanciasController implements Initializable {
         if(vBoxListaTrabajos.getPrefHeight() < scrPaneTrabajos.getPrefHeight()){
             vBoxListaTrabajos.setPrefHeight(scrPaneTrabajos.getPrefHeight());
         }
+    }
+
+    @Override
+    public void cargarDatosConstanciaImpartirEE(ImparticionExperienciaEducativa trabajo,FXMLTrabajoDocenteImpartirEEController elementoSeleccionado) {
+        restaurarInformacionConstancia();
+        trabajoActual = trabajo;
+        for(FXMLTrabajoDocenteImpartirEEController elemento: trabajosElementosEE){
+            if(elemento != elementoSeleccionado){
+                elemento.establecerColorPorDefecto();
+            }
+        }
+        mostrarInformacionConstancia();
+    }
+    
+    private void mostrarInformacionConstancia(){
+        ancPaneInformacionConstancia.setVisible(true);
+        if(trabajoActual.getFechaExpedicionConstancia() != null){
+            String nombreConstancia = "CONSTANCIA-" + trabajoActual.getTipoTrabajo().getNombreTrabajo() + "-" +
+                    trabajoActual.getFechaExpedicionConstancia();
+            
+            lblFechaExpedicion.setText(trabajoActual.getFechaExpedicionConstancia().toString());
+            lblNombreConstancia.setText(nombreConstancia);
+            
+            String cssFile = JavaFXSGACP.class.getResource("estilos/fxmlcreacionconstancias.css").toExternalForm();
+            nchPaneArchivoPDF.getStylesheets().add(cssFile);
+            nchPaneArchivoPDF.getStyleClass().add("anchorPanePDF");
+        }
+    }
+    
+    private void restaurarInformacionConstancia(){
+        lblFechaExpedicion.setText("-------");
+        lblNombreConstancia.setText("-------");
     }
     
 }

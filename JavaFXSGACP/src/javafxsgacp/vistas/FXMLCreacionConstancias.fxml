@@ -98,12 +98,12 @@
             </AnchorPane>
             <AnchorPane layoutX="16.0" layoutY="439.0" minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="299.0" style="-fx-border-color: #034f75; -fx-border-width: 3; -fx-border-radius: 10;" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
                <children>
-                  <Label alignment="CENTER" layoutX="81.0" layoutY="8.0" prefHeight="51.0" prefWidth="204.0" text="ConstanciaImpartirEE 28/10/2023.PDF" wrapText="true" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+                  <Label fx:id="lblNombreConstancia" alignment="CENTER" layoutX="81.0" layoutY="8.0" prefHeight="51.0" prefWidth="204.0" text="-------" wrapText="true" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
                      <font>
-                        <Font name="Futura Bk BT Book" size="18.0" />
+                        <Font name="Futura Bk BT Book" size="12.0" />
                      </font>
                   </Label>
-                  <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="51.0" prefWidth="46.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 10;" styleClass="body1" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0" />
+                  <AnchorPane fx:id="nchPaneArchivoPDF" layoutX="14.0" layoutY="8.0" prefHeight="51.0" prefWidth="46.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 10;" styleClass="body1" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0" />
                </children>
             </AnchorPane>
             <Label layoutX="21.0" layoutY="354.0" prefHeight="23.0" prefWidth="214.0" text="Fecha de Expedición: " textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="21.0">
@@ -111,7 +111,7 @@
                   <Font name="Futura Md BT Bold" size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="48.0" layoutY="377.0" prefHeight="25.0" prefWidth="235.0" text="28 de septiembre del 2023" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0">
+            <Label fx:id="lblFechaExpedicion" alignment="CENTER" layoutX="48.0" layoutY="377.0" prefHeight="25.0" prefWidth="235.0" text="------" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0">
                <font>
                   <Font name="Futura Bk BT Book" size="18.0" />
                </font>
@@ -134,7 +134,7 @@
                   <Font name="Futura Md BT Bold" size="16.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="12.0" layoutY="133.0" prefHeight="217.0" prefWidth="308.0" styleClass="body1" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="133.0" />
+            <AnchorPane fx:id="nchPaneFormatoConstancia" layoutX="12.0" layoutY="133.0" prefHeight="217.0" prefWidth="308.0" styleClass="body1" stylesheets="@../estilos/fxmlcreacionconstancias.css" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="133.0" />
          </children>
       </AnchorPane>
    </children>

@@ -34,7 +34,7 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //Por Cambiar Con Inicio Sesion
             docente = new Usuario();
-            docente.setNoPersonal("123455");
+            docente.setNoPersonal("59715493");
         //Fin Del Cambio
     }    
 

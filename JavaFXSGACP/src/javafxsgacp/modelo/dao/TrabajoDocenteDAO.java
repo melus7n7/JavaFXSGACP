@@ -34,8 +34,9 @@ public class TrabajoDocenteDAO {
         if(conexionBD != null){
             try{
                 String consulta = "SELECT trabajodocente.idTrabajoDocente, fechaRegistro, fechaConstancia, nombre, nombreProgramaEducativo, " +
-                    "nombrePeriodo, nombreSeccion, nombreBloque " +
+                    "nombrePeriodo, nombreSeccion, nombreBloque, TrabajoDocente.idTipoTrabajoDocente, nombreTrabajo " +
                     "FROM trabajodocente " +
+                    "INNER JOIN TipoTrabajoDocente ON TipoTrabajoDocente.idTipoTrabajoDocente = TrabajoDocente.idTipoTrabajoDocente " +    
                     "INNER JOIN ImparticionExperienciaEducativa ON trabajoDocente.idTrabajoDocente = ImparticionExperienciaEducativa.idtrabajoDocente " +
                     "INNER JOIN ExperienciaEducativa ON ExperienciaEducativa.NRC = ImparticionExperienciaEducativa.NRC " +
                     "INNER JOIN ProgramaEducativo ON ExperienciaEducativa.idProgramaEducativo = ProgramaEducativo.idProgramaEducativo " +
@@ -55,6 +56,10 @@ public class TrabajoDocenteDAO {
                     trabajo.setIdTrabajoDocente(resultado.getInt("idTrabajoDocente"));
                     trabajo.setFechaRegistro(resultado.getDate("fechaRegistro"));
                     trabajo.setFechaExpedicionConstancia(resultado.getDate("fechaConstancia"));
+                    
+                    TipoTrabajoDocente tipo = new TipoTrabajoDocente();
+                    tipo.setIdTipoTrabajoDocente(resultado.getInt("idTipoTrabajoDocente"));
+                    tipo.setNombreTrabajo(resultado.getString("nombreTrabajo"));
                     
                     ExperienciaEducativa experienciaEducativa = new ExperienciaEducativa();
                     experienciaEducativa.setNombre(resultado.getString("nombre"));
@@ -76,6 +81,7 @@ public class TrabajoDocenteDAO {
                     experienciaEducativa.setBloque(bloque);
                     experienciaEducativa.setSeccion(seccion);
                     trabajo.setExperienciaEducativa(experienciaEducativa);
+                    trabajo.setTipoTrabajo(tipo);
                     
                     listaTrabajos.add(trabajo);
                 }
