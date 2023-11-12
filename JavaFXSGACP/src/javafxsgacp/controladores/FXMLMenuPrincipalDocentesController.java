@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafxsgacp.JavaFXSGACP;
+import javafxsgacp.modelo.pojo.Usuario;
 
 /**
  * FXML Controller class
@@ -24,12 +25,17 @@ import javafxsgacp.JavaFXSGACP;
  */
 public class FXMLMenuPrincipalDocentesController implements Initializable {
 
+    private Usuario docente;
+            
     @FXML
     private Label lblNombreDocente;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //Por Cambiar Con Inicio Sesion
+            docente = new Usuario();
+            docente.setNoPersonal("123455");
+        //Fin Del Cambio
     }    
 
     @FXML
@@ -39,6 +45,7 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
             FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLCreacionConstancias.fxml"));
             Parent vista = accesoControlador.load();
             FXMLCreacionConstanciasController creacionConstancias = accesoControlador.getController();
+            creacionConstancias.inicializarPantalla(docente);
             
             escenarioBase.setScene(new Scene (vista));
             escenarioBase.setTitle("Generación Constancias");

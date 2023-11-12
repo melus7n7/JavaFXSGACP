@@ -8,6 +8,28 @@ package javafxsgacp.modelo.pojo;
  *
  * @author sulem
  */
-public class ImparticionExperienciaEducativa {
+public class ImparticionExperienciaEducativa extends TrabajoDocente{
+    private int idImpartirExperienciaEducativa;
+    private ExperienciaEducativa experienciaEducativa;
+
+    public ImparticionExperienciaEducativa() {
+    }
+
+    public int getIdImpartirExperienciaEducativa() {
+        return idImpartirExperienciaEducativa;
+    }
+
+    public ExperienciaEducativa getExperienciaEducativa() {
+        return experienciaEducativa;
+    }
+
+    public void setIdImpartirExperienciaEducativa(int idImpartirExperienciaEducativa) {
+        this.idImpartirExperienciaEducativa = idImpartirExperienciaEducativa;
+    }
+
+    public void setExperienciaEducativa(ExperienciaEducativa experienciaEducativa) {
+        this.experienciaEducativa = experienciaEducativa;
+    }
+    
     
 }
