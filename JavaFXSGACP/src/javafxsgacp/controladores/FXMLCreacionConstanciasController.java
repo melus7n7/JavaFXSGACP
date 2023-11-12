@@ -13,14 +13,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -51,6 +54,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     private ArrayList<FXMLTrabajoDocenteImpartirEEController> trabajosElementosEE;
     private Usuario docente;
     private TrabajoDocente trabajoActual;
+    private boolean mostrarTrabajosConConstancias;
     
     @FXML
     private Label lblNombreDocente;
@@ -70,12 +74,17 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     private Label lblFechaExpedicion;
     @FXML
     private AnchorPane nchPaneFormatoConstancia;
+    @FXML
+    private RadioButton rdButtonTrabajosConConstancias;
+    @FXML
+    private Button btnDescargar;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        mostrarTrabajosConConstancias = false;
         ancPaneInformacionConstancia.setVisible(false);
         cargarTiposTrabajo();
         cmbBoxTiposRegistro.valueProperty().addListener(new ChangeListener<TipoTrabajoDocente>(){
@@ -160,7 +169,12 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     private void cargarTrabajosDocenteImpartirEE(){
         int altoVBox = 0;
         trabajosElementosEE = new ArrayList<>();
+        vBoxListaTrabajos.getChildren().clear();
+        ancPaneInformacionConstancia.setVisible(false);
         for (int i=0; i<trabajosDocenteEE.size(); i++){
+            if(!mostrarTrabajosConConstancias && trabajosDocenteEE.get(i).getFechaExpedicionConstancia() != null){
+                continue;
+            }
             FXMLLoader fmxlLoaderTrabajoEE = new FXMLLoader();
             fmxlLoaderTrabajoEE.setLocation(JavaFXSGACP.class.getResource("vistas/FXMLTrabajoDocenteImpartirEE.fxml"));
             try{
@@ -202,15 +216,45 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
             lblFechaExpedicion.setText(trabajoActual.getFechaExpedicionConstancia().toString());
             lblNombreConstancia.setText(nombreConstancia);
             
-            String cssFile = JavaFXSGACP.class.getResource("estilos/fxmlcreacionconstancias.css").toExternalForm();
-            nchPaneArchivoPDF.getStylesheets().add(cssFile);
+            String cssArchivo = JavaFXSGACP.class.getResource("estilos/fxmlcreacionconstancias.css").toExternalForm();
+            nchPaneArchivoPDF.getStyleClass().clear();
+            nchPaneArchivoPDF.getStylesheets().add(cssArchivo);
             nchPaneArchivoPDF.getStyleClass().add("anchorPanePDF");
+            
+            nchPaneFormatoConstancia.getStyleClass().clear();
+            nchPaneFormatoConstancia.getStylesheets().add(cssArchivo);
+            nchPaneFormatoConstancia.getStyleClass().add("constanciaEE");
+            btnDescargar.setText("Descargar");
+        }else{
+            btnDescargar.setText("Generar Constancia");
         }
     }
     
     private void restaurarInformacionConstancia(){
         lblFechaExpedicion.setText("-------");
         lblNombreConstancia.setText("-------");
+        
+        String cssArchivo = JavaFXSGACP.class.getResource("estilos/fxmlcreacionconstancias.css").toExternalForm();
+        nchPaneArchivoPDF.getStyleClass().clear();
+        nchPaneArchivoPDF.getStylesheets().add(cssArchivo);
+        nchPaneArchivoPDF.getStyleClass().add("anchorPaneVacioPDF");
+        
+        nchPaneFormatoConstancia.getStyleClass().clear();
+        nchPaneFormatoConstancia.getStylesheets().add(cssArchivo);
+        nchPaneFormatoConstancia.getStyleClass().add("anchorPaneVacioPDF");
+    }
+
+    @FXML
+    private void clickMostrarTrabajosConConstancias(ActionEvent event) {
+        mostrarTrabajosConConstancias = rdButtonTrabajosConConstancias.isSelected();
+        if(trabajosDocenteEE != null){
+            cargarTrabajosDocenteImpartirEE();
+        }
+    }
+
+    @FXML
+    private void clicDescargar(ActionEvent event) {
+        
     }
     
 }

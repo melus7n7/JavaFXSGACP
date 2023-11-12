@@ -53,6 +53,21 @@
     -fx-background-position: center;
 }
 
+.anchorPaneVacioPDF{
+    -fx-background-image: none;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-border-radius: 10;
+}
+
+.constanciaEE{
+    -fx-background-image: url(ConstanciaImparticionEE.jpg);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-width: 0;
+}
+
 .radio-button .radio {
      -fx-border-width: 3px;
      -fx-border-color: #034f75;

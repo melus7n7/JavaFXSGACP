@@ -1,0 +1,19 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 11 nov 2023, 20:21:05
+    Author     : sulem
+*/
+
+.constanciaEE{
+    -fx-background-image: url(ConstanciaImparticionEE.jpg);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-width: 0;
+}
+
+.anchorPaneVacioConstancia{
+}
