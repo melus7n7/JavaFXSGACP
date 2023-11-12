@@ -27,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafxsgacp.JavaFXSGACP;
 import javafxsgacp.modelo.pojo.Director;
 import javafxsgacp.modelo.pojo.ExperienciaEducativa;
+import javafxsgacp.modelo.pojo.FirmaFacultad;
 import javafxsgacp.modelo.pojo.ImparticionExperienciaEducativa;
 import javafxsgacp.modelo.pojo.Periodo;
 import javafxsgacp.modelo.pojo.ProgramaEducativo;
@@ -38,15 +39,10 @@ import javafxsgacp.modelo.pojo.Usuario;
  * @author sulem
  */
 public class Constancia {
-    public static byte[] generarConstanciaImpartirEE(ImparticionExperienciaEducativa trabajo, Usuario docente){
+    public static byte[] generarConstanciaImpartirEE(ImparticionExperienciaEducativa trabajo, Usuario docente, FirmaFacultad firma){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Document documento = new Document();
-        String ruta = javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
-        
         try {
-            String nombreArchivo = "CONSTANCIA-" + trabajo.getTipoTrabajo().getNombreTrabajo() + "-" +
-                    trabajo.getFechaExpedicionConstancia() + ".pdf";
-            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/" + nombreArchivo));
             PdfWriter.getInstance(documento, byteArrayOutputStream);
             documento.setMargins(80, 80, 40, 40);
             documento.open();
@@ -183,17 +179,16 @@ public class Constancia {
             documento.add(parrafoEspacioInicio);
             documento.add(parrafoEspacioInicio);
             
-            //FIRMA DEL DOCENTE
+            //FIRMA DE LA FACULTAD
             
             try{
-                Image imagenFirma = PngImage.getImage(docente.getFirmaDigital());                
+                Image imagenFirma = PngImage.getImage(firma.getArchivoFirma());                
                 imagenFirma.scaleAbsolute(80, 80);
                 imagenFirma.setAlignment(Element.ALIGN_CENTER);
                 documento.add(imagenFirma);
             }catch(DocumentException | IOException e){
                 System.out.println(e);
             }
-            
             documento.close();
         } catch (DocumentException ex) {
             ex.printStackTrace();

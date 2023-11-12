@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafxsgacp.JavaFXSGACP;
+import javafxsgacp.modelo.dao.FirmaFacultadoDAO;
 import javafxsgacp.modelo.dao.TrabajoDocenteDAO;
 import javafxsgacp.modelo.pojo.TrabajoDocente;
 import javafxsgacp.modelo.pojo.Usuario;

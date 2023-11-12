@@ -37,9 +37,11 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import javafxsgacp.JavaFXSGACP;
 import javafxsgacp.interfaces.INotificacionTrabajoDocenteDatosConstancia;
+import javafxsgacp.modelo.dao.FirmaFacultadoDAO;
 import javafxsgacp.modelo.dao.TipoTrabajoDocenteDAO;
 import javafxsgacp.modelo.dao.TrabajoDocenteDAO;
 import javafxsgacp.modelo.dao.UsuarioDAO;
+import javafxsgacp.modelo.pojo.FirmaFacultad;
 import javafxsgacp.modelo.pojo.ImparticionExperienciaEducativa;
 import javafxsgacp.modelo.pojo.TipoTrabajoDocente;
 import javafxsgacp.modelo.pojo.TrabajoDocente;
@@ -60,6 +62,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     private ArrayList<FXMLTrabajoDocenteImpartirEEController> trabajosElementosEE;
     private Usuario docente;
     private TrabajoDocente trabajoActual;
+    private FirmaFacultad firmaFacultad;
     private boolean mostrarTrabajosConConstancias;
     
     @FXML
@@ -90,13 +93,16 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        trabajoActual = null;
         mostrarTrabajosConConstancias = false;
         ancPaneInformacionConstancia.setVisible(false);
         cargarTiposTrabajo();
+        recuperarFirmaDigital();
         cmbBoxTiposRegistro.valueProperty().addListener(new ChangeListener<TipoTrabajoDocente>(){
             @Override
             public void changed(ObservableValue<? extends TipoTrabajoDocente> observable, TipoTrabajoDocente oldValue, TipoTrabajoDocente newValue) {
                 if (newValue != null){
+                    trabajoActual = null;
                     trabajosDocenteEE = null;
                     vBoxListaTrabajos.getChildren().clear();
                     ancPaneInformacionConstancia.setVisible(false);
@@ -109,7 +115,6 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     public void inicializarPantalla(Usuario docente){
         this.docente = docente;
         prepararDatosVentana();
-        recuperarFirmaDigital();
     }
     
     private void prepararDatosVentana(){
@@ -119,15 +124,15 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     }
     
     private void recuperarFirmaDigital(){
-        Pair<Constantes, byte[]> respuestaConsulta = UsuarioDAO.recuperarFirmaDigital(docente);
-        byte[] firmaDocente = respuestaConsulta.getValue();
+        Pair<Constantes, FirmaFacultad> respuestaConsulta = FirmaFacultadoDAO.recuperarFirmaDigitalFacultad();
+        FirmaFacultad firma = respuestaConsulta.getValue();
         Constantes respuesta = respuestaConsulta.getKey();
         switch(respuesta){
             case OPERACION_EXITOSA:
-                docente.setFirmaDigital(firmaDocente);
+                firmaFacultad = firma;
                 break;
             case OPERACION_VACIA:
-                Utilidades.mostrarDialogoSimple("Firma digital no válida", "Necesita agregar una firma digital para generar constancias", Alert.AlertType.WARNING);
+                Utilidades.mostrarDialogoSimple("Firma digital no válida", "Consulte con el personal administrativo", Alert.AlertType.WARNING);
                 salirAMenuPrincipalDocente();
                 break;
             case ERROR_CONEXION_BD:
@@ -210,15 +215,22 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         vBoxListaTrabajos.getChildren().clear();
         ancPaneInformacionConstancia.setVisible(false);
         for (int i=0; i<trabajosDocenteEE.size(); i++){
+            //ESTA MAL
             if(!mostrarTrabajosConConstancias && trabajosDocenteEE.get(i).getFechaExpedicionConstancia() != null){
-                continue;
+                if(trabajoActual != null && trabajoActual.getIdTrabajoDocente() != trabajosDocenteEE.get(i).getIdTrabajoDocente()){
+                    continue;
+                }
             }
             FXMLLoader fmxlLoaderTrabajoEE = new FXMLLoader();
             fmxlLoaderTrabajoEE.setLocation(JavaFXSGACP.class.getResource("vistas/FXMLTrabajoDocenteImpartirEE.fxml"));
             try{
                 Pane pane = fmxlLoaderTrabajoEE.load();
                 FXMLTrabajoDocenteImpartirEEController elementoEnLista = fmxlLoaderTrabajoEE.getController();
-                elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this);
+                if(trabajoActual != null && trabajoActual.getIdTrabajoDocente() == trabajosDocenteEE.get(i).getIdTrabajoDocente()){
+                    elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this, true);
+                }else{
+                    elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this, false);
+                }
                 trabajosElementosEE.add(elementoEnLista);
                 
                 altoVBox += pane.getPrefHeight();
@@ -298,7 +310,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     }
     
     private void generarConstanciaEE(ImparticionExperienciaEducativa trabajoEE){
-        byte[] archivoConstancia = Constancia.generarConstanciaImpartirEE(trabajoEE, docente);
+        byte[] archivoConstancia = Constancia.generarConstanciaImpartirEE(trabajoEE, docente, firmaFacultad);
         if(archivoConstancia != null){
             guardarConstanciaBD(archivoConstancia);
         }else{
@@ -314,6 +326,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
                 Utilidades.mostrarDialogoSimple("Constancia Generada y Guardada", "La constancia de "
                     +  trabajoActual.getTipoTrabajo().getNombreTrabajo() + " ha sido generada correctamente", 
                     Alert.AlertType.INFORMATION);
+                recuperarTrabajosDocenteImpartirEE();
                 break;
             case OPERACION_VACIA:
                 Utilidades.mostrarDialogoSimple("Error al guardar la constancia", "No se ha podido guardar "
@@ -344,7 +357,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
                     Alert.AlertType.ERROR);
         }
     }
-    //NUIOSDENBUITNOB
+    
     private void descargarConstancia(byte[] constancia){
         DirectoryChooser dialogoSeleccionDireccion = new DirectoryChooser();
         dialogoSeleccionDireccion.setTitle("Seleccione la carpeta para descargar el documento");
@@ -367,4 +380,5 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         return "CONSTANCIA-" + trabajoActual.getTipoTrabajo().getNombreTrabajo() + "-" +
                     trabajoActual.getFechaExpedicionConstancia();
     }
+    
 }
