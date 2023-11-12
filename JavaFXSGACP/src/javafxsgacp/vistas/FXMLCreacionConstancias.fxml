@@ -31,7 +31,7 @@
                         <Font name="Futura Bk BT Book" size="13.0" />
                      </font>
                   </RadioButton>
-                  <DatePicker layoutX="496.0" layoutY="35.0" prefHeight="25.0" prefWidth="159.0" stylesheets="@../estilos/EstiloDatePicker.css" AnchorPane.rightAnchor="28.0" />
+                  <DatePicker fx:id="dtPickerFechaInicio" layoutX="496.0" layoutY="35.0" onAction="#clicAjustarFecha" prefHeight="25.0" prefWidth="159.0" stylesheets="@../estilos/EstiloDatePicker.css" AnchorPane.rightAnchor="28.0" />
                   <Label alignment="CENTER" layoutX="413.0" layoutY="8.0" prefHeight="20.0" prefWidth="204.0" text="Fecha en la que se registró:" AnchorPane.rightAnchor="68.0">
                      <font>
                         <Font name="Futura Bk BT Book" size="16.0" />
@@ -42,7 +42,7 @@
                         <Font name="Futura Bk BT Book" size="14.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="496.0" layoutY="73.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../estilos/EstiloDatePicker.css" AnchorPane.rightAnchor="28.0" />
+                  <DatePicker fx:id="dtPickerFechaFin" layoutX="496.0" layoutY="73.0" onAction="#clicAjustarFecha" prefHeight="25.0" prefWidth="159.0" stylesheets="@../estilos/EstiloDatePicker.css" AnchorPane.rightAnchor="28.0" />
                   <Label alignment="CENTER" layoutX="373.0" layoutY="77.0" prefHeight="18.0" prefWidth="105.0" text="Hasta la fecha:" AnchorPane.rightAnchor="207.0">
                      <font>
                         <Font name="Futura Bk BT Book" size="14.0" />

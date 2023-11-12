@@ -141,16 +141,17 @@ public class TrabajoDocenteDAO {
         return new Pair<>(respuesta, constancia);
     }
     
-    public static Constantes guardarArchivoConstancia(byte[] archivo, int idTrabajoDocente){
+    public static Constantes guardarArchivoConstancia(byte[] archivo, int idTrabajoDocente, int idFirma){
         Constantes respuesta;
         Connection conexionBD = ConexionBD.abrirConexionBD();
         if(conexionBD != null){
             try{
-                String sentencia = "UPDATE TrabajoDocente SET fechaConstancia = current_date(), archivoConstancia = ? "
+                String sentencia = "UPDATE TrabajoDocente SET fechaConstancia = current_date(), archivoConstancia = ?, idFirma = ? "
                         + "WHERE idTrabajoDocente = ?";
                 PreparedStatement prepararSentencia = conexionBD.prepareStatement(sentencia);
                 prepararSentencia.setBytes(1, archivo);
-                prepararSentencia.setInt(2, idTrabajoDocente);
+                prepararSentencia.setInt(3, idTrabajoDocente);
+                prepararSentencia.setInt(2, idFirma);
                 int filasAfectadas = prepararSentencia.executeUpdate();
                 respuesta = (filasAfectadas <= 0) ? Constantes.OPERACION_VACIA : Constantes.OPERACION_EXITOSA;
                 conexionBD.close();

@@ -9,7 +9,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -63,7 +68,10 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     private Usuario docente;
     private TrabajoDocente trabajoActual;
     private FirmaFacultad firmaFacultad;
+    private LocalDate fechaInicioRango;
+    private LocalDate fechaFinRango;
     private boolean mostrarTrabajosConConstancias;
+    
     
     @FXML
     private Label lblNombreDocente;
@@ -87,6 +95,10 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     private RadioButton rdButtonTrabajosConConstancias;
     @FXML
     private Button btnDescargar;
+    @FXML
+    private DatePicker dtPickerFechaInicio;
+    @FXML
+    private DatePicker dtPickerFechaFin;
 
     /**
      * Initializes the controller class.
@@ -110,6 +122,18 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
                 }
             }
         });
+    }
+    
+    @FXML
+    private void clicAjustarFecha(ActionEvent event) {
+        fechaInicioRango = dtPickerFechaInicio.getValue();
+        fechaFinRango = dtPickerFechaFin.getValue();
+        if((fechaInicioRango != null || fechaFinRango != null) && trabajosDocenteEE != null){
+            cargarTrabajosDocenteImpartirEE();
+            if(trabajoActual != null && !estaDentroRango(trabajoActual)){
+                ancPaneInformacionConstancia.setVisible(false);
+            }
+        }
     }
     
     public void inicializarPantalla(Usuario docente){
@@ -216,26 +240,23 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         ancPaneInformacionConstancia.setVisible(trabajoActual != null);
         
         for (int i=0; i<trabajosDocenteEE.size(); i++){
-            if(!mostrarTrabajosConConstancias && trabajosDocenteEE.get(i).getFechaExpedicionConstancia() != null){
-                if(trabajoActual == null){
+            if(trabajoActual != null && trabajoActual.getIdTrabajoDocente() == trabajosDocenteEE.get(i).getIdTrabajoDocente()){
+                trabajoActual = trabajosDocenteEE.get(i);
+            }else{
+                if(!mostrarTrabajosConConstancias && trabajosDocenteEE.get(i).getFechaExpedicionConstancia() != null){
                     continue;
                 }
-                if(trabajoActual.getIdTrabajoDocente() == trabajosDocenteEE.get(i).getIdTrabajoDocente()){
-                    trabajoActual = trabajosDocenteEE.get(i);
-                }else{
-                    continue;
-                }
+            }
+            if(!estaDentroRango(trabajosDocenteEE.get(i))){
+                continue;
             }
             FXMLLoader fmxlLoaderTrabajoEE = new FXMLLoader();
             fmxlLoaderTrabajoEE.setLocation(JavaFXSGACP.class.getResource("vistas/FXMLTrabajoDocenteImpartirEE.fxml"));
             try{
                 Pane pane = fmxlLoaderTrabajoEE.load();
                 FXMLTrabajoDocenteImpartirEEController elementoEnLista = fmxlLoaderTrabajoEE.getController();
-                if(trabajoActual != null && trabajoActual.getIdTrabajoDocente() == trabajosDocenteEE.get(i).getIdTrabajoDocente()){
-                    elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this, true);
-                }else{
-                    elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this, false);
-                }
+                boolean estaraSeleccionado = trabajoActual != null && trabajoActual.getIdTrabajoDocente() == trabajosDocenteEE.get(i).getIdTrabajoDocente();
+                elementoEnLista.inicializarTrabajoEE(trabajosDocenteEE.get(i), this, estaraSeleccionado);
                 trabajosElementosEE.add(elementoEnLista);
                 
                 altoVBox += pane.getPrefHeight();
@@ -248,6 +269,19 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         if(vBoxListaTrabajos.getPrefHeight() < scrPaneTrabajos.getPrefHeight()){
             vBoxListaTrabajos.setPrefHeight(scrPaneTrabajos.getPrefHeight());
         }
+    }
+    
+    private boolean estaDentroRango(TrabajoDocente trabajo){
+        boolean fechaInicioValido = true;
+        boolean fechaFinValido = true;
+        LocalDate fecharegistro = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(trabajo.getFechaRegistro()));
+        if(fechaInicioRango != null ){
+            fechaInicioValido = fecharegistro.isAfter(fechaInicioRango);
+        }
+        if(fechaFinRango != null){
+            fechaFinValido = fecharegistro.isBefore(fechaFinRango);
+        }
+        return fechaInicioValido && fechaFinValido;
     }
 
     @Override
@@ -268,7 +302,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         nchPaneFormatoConstancia.getStyleClass().clear();
         nchPaneFormatoConstancia.getStylesheets().add(cssArchivo);
         nchPaneFormatoConstancia.getStyleClass().add("constanciaEE");
-            
+        
         if(trabajoActual.getFechaExpedicionConstancia() != null){
             lblFechaExpedicion.setText(Utilidades.formatoFechaEscrito(trabajoActual.getFechaExpedicionConstancia()));
             lblNombreConstancia.setText(nombreArchivoConstancia());
@@ -325,7 +359,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         }
     }
     private void guardarConstanciaBD(byte[] archivo){
-        Constantes respuesta = TrabajoDocenteDAO.guardarArchivoConstancia(archivo, trabajoActual.getIdTrabajoDocente());
+        Constantes respuesta = TrabajoDocenteDAO.guardarArchivoConstancia(archivo, trabajoActual.getIdTrabajoDocente(), firmaFacultad.getIdFirma());
         switch(respuesta){
             case OPERACION_EXITOSA:
                 Utilidades.mostrarDialogoSimple("Constancia Generada y Guardada", "La constancia de "
