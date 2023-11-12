@@ -62,7 +62,7 @@
                         <Font name="Futura Md BT Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblNombreDocente" alignment="CENTER" layoutX="6.0" layoutY="58.0" prefHeight="23.0" prefWidth="258.0" text="Docente: ERIKA MENESES RICO" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="lblNombreDocente" layoutX="6.0" layoutY="58.0" prefHeight="23.0" prefWidth="603.0" text="Docente: ERIKA MENESES RICO" textFill="WHITE">
                      <font>
                         <Font name="Futura Md BT Bold" size="14.0" />
                      </font>

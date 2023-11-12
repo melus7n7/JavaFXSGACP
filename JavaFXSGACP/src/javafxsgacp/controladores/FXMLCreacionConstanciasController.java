@@ -35,10 +35,12 @@ import javafxsgacp.JavaFXSGACP;
 import javafxsgacp.interfaces.INotificacionTrabajoDocenteDatosConstancia;
 import javafxsgacp.modelo.dao.TipoTrabajoDocenteDAO;
 import javafxsgacp.modelo.dao.TrabajoDocenteDAO;
+import javafxsgacp.modelo.dao.UsuarioDAO;
 import javafxsgacp.modelo.pojo.ImparticionExperienciaEducativa;
 import javafxsgacp.modelo.pojo.TipoTrabajoDocente;
 import javafxsgacp.modelo.pojo.TrabajoDocente;
 import javafxsgacp.modelo.pojo.Usuario;
+import javafxsgacp.utilidades.Constancia;
 import javafxsgacp.utilidades.Constantes;
 import javafxsgacp.utilidades.Utilidades;
 
@@ -102,10 +104,42 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     
     public void inicializarPantalla(Usuario docente){
         this.docente = docente;
+        prepararDatosVentana();
+        recuperarFirmaDigital();
+    }
+    
+    private void prepararDatosVentana(){
+        String nombreCompleto = "Docente: " + docente.getNombre().toUpperCase() + " " +
+                docente.getApellidoPaterno().toUpperCase() + " " + docente.getApellidoMaterno().toUpperCase();
+        lblNombreDocente.setText(nombreCompleto);
+    }
+    
+    private void recuperarFirmaDigital(){
+        Pair<Constantes, byte[]> respuestaConsulta = UsuarioDAO.recuperarFirmaDigital(docente);
+        byte[] firmaDocente = respuestaConsulta.getValue();
+        Constantes respuesta = respuestaConsulta.getKey();
+        switch(respuesta){
+            case OPERACION_EXITOSA:
+                docente.setFirmaDigital(firmaDocente);
+                break;
+            case OPERACION_VACIA:
+                Utilidades.mostrarDialogoSimple("Firma digital no válida", "Necesita agregar una firma digital para generar constancias", Alert.AlertType.WARNING);
+                salirAMenuPrincipalDocente();
+                break;
+            case ERROR_CONEXION_BD:
+            case ERROR_CONSULTA:
+                Utilidades.mostrarDialogoSimple("Error de conexión", "Error para conectarse a la base de datos", Alert.AlertType.ERROR);
+                salirAMenuPrincipalDocente();
+                break;
+        }
     }
     
     @FXML
     private void clickRegresarMenu(MouseEvent event) {
+        salirAMenuPrincipalDocente();
+    }
+    
+    private void salirAMenuPrincipalDocente(){
         Stage escenarioBase = (Stage) lblNombreDocente.getScene().getWindow();
         try {
             FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLMenuPrincipalDocentes.fxml"));
@@ -209,6 +243,11 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     
     private void mostrarInformacionConstancia(){
         ancPaneInformacionConstancia.setVisible(true);
+        String cssArchivo = JavaFXSGACP.class.getResource("estilos/fxmlcreacionconstancias.css").toExternalForm();
+        nchPaneFormatoConstancia.getStyleClass().clear();
+        nchPaneFormatoConstancia.getStylesheets().add(cssArchivo);
+        nchPaneFormatoConstancia.getStyleClass().add("constanciaEE");
+            
         if(trabajoActual.getFechaExpedicionConstancia() != null){
             String nombreConstancia = "CONSTANCIA-" + trabajoActual.getTipoTrabajo().getNombreTrabajo() + "-" +
                     trabajoActual.getFechaExpedicionConstancia();
@@ -216,14 +255,9 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
             lblFechaExpedicion.setText(trabajoActual.getFechaExpedicionConstancia().toString());
             lblNombreConstancia.setText(nombreConstancia);
             
-            String cssArchivo = JavaFXSGACP.class.getResource("estilos/fxmlcreacionconstancias.css").toExternalForm();
             nchPaneArchivoPDF.getStyleClass().clear();
             nchPaneArchivoPDF.getStylesheets().add(cssArchivo);
             nchPaneArchivoPDF.getStyleClass().add("anchorPanePDF");
-            
-            nchPaneFormatoConstancia.getStyleClass().clear();
-            nchPaneFormatoConstancia.getStylesheets().add(cssArchivo);
-            nchPaneFormatoConstancia.getStyleClass().add("constanciaEE");
             btnDescargar.setText("Descargar");
         }else{
             btnDescargar.setText("Generar Constancia");
@@ -254,7 +288,22 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
 
     @FXML
     private void clicDescargar(ActionEvent event) {
-        
+        ImparticionExperienciaEducativa trabajoEE = (ImparticionExperienciaEducativa) trabajoActual;
+        if(trabajoEE != null && trabajoEE.getFechaExpedicionConstancia() == null){
+            generarConstanciaEE(trabajoEE);
+        }else{
+            descargarConstancia();
+        }
+    }
+    
+    private void generarConstanciaEE(ImparticionExperienciaEducativa trabajoEE){
+        Constancia.generarConstanciaImpartirEE(trabajoEE, docente);
+        System.out.println(trabajoEE.getExperienciaEducativa().getNombre());
+    }
+    
+    private void descargarConstancia(){
+        String ruta = javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
+        Utilidades.mostrarDialogoSimple("Constancia descargada", "Se descargó el reporte en la ruta "+ruta, Alert.AlertType.INFORMATION);
     }
     
 }

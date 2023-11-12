@@ -4,8 +4,10 @@
  */
 package javafxsgacp.controladores;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafxsgacp.JavaFXSGACP;
+import javafxsgacp.modelo.dao.TrabajoDocenteDAO;
+import javafxsgacp.modelo.pojo.TrabajoDocente;
 import javafxsgacp.modelo.pojo.Usuario;
 
 /**
@@ -35,8 +40,12 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
         //Por Cambiar Con Inicio Sesion
             docente = new Usuario();
             docente.setNoPersonal("59715493");
+            docente.setNombre("Sulem");
+            docente.setApellidoPaterno("Martínez");
+            docente.setApellidoMaterno("Aguilar");
+            mostrarInformacionPantalla();
         //Fin Del Cambio
-    }    
+    }
 
     @FXML
     private void clickGenerarConstancia(MouseEvent event) {
@@ -60,4 +69,9 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
         //Ir Inicio Sesion
     }
     
+    private void mostrarInformacionPantalla(){
+        String nombreCompleto = docente.getNombre().toUpperCase() + " " + docente.getApellidoPaterno().toUpperCase() +
+                " " + docente.getApellidoMaterno().toUpperCase();
+        lblNombreDocente.setText(nombreCompleto);
+    }
 }

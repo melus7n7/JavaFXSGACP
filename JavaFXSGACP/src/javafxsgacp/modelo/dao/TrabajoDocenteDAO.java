@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javafx.util.Pair;
 import javafxsgacp.modelo.ConexionBD;
 import javafxsgacp.modelo.pojo.Bloque;
+import javafxsgacp.modelo.pojo.Director;
 import javafxsgacp.modelo.pojo.ExperienciaEducativa;
 import javafxsgacp.modelo.pojo.ImparticionExperienciaEducativa;
 import javafxsgacp.modelo.pojo.Periodo;
@@ -34,8 +35,10 @@ public class TrabajoDocenteDAO {
         if(conexionBD != null){
             try{
                 String consulta = "SELECT trabajodocente.idTrabajoDocente, fechaRegistro, fechaConstancia, nombre, nombreProgramaEducativo, " +
-                    "nombrePeriodo, nombreSeccion, nombreBloque, TrabajoDocente.idTipoTrabajoDocente, nombreTrabajo " +
+                    "nombrePeriodo, nombreSeccion, nombreBloque, TrabajoDocente.idTipoTrabajoDocente, nombreTrabajo, " +
+                    "nombreDirector, apellidoPaterno, apellidoMaterno, creditos, hsm " +
                     "FROM trabajodocente " +
+                    "INNER JOIN Director ON Director.idDirector = trabajodocente.idDirector " +
                     "INNER JOIN TipoTrabajoDocente ON TipoTrabajoDocente.idTipoTrabajoDocente = TrabajoDocente.idTipoTrabajoDocente " +    
                     "INNER JOIN ImparticionExperienciaEducativa ON trabajoDocente.idTrabajoDocente = ImparticionExperienciaEducativa.idtrabajoDocente " +
                     "INNER JOIN ExperienciaEducativa ON ExperienciaEducativa.NRC = ImparticionExperienciaEducativa.NRC " +
@@ -63,6 +66,8 @@ public class TrabajoDocenteDAO {
                     
                     ExperienciaEducativa experienciaEducativa = new ExperienciaEducativa();
                     experienciaEducativa.setNombre(resultado.getString("nombre"));
+                    experienciaEducativa.setHsm(resultado.getInt("hsm"));
+                    experienciaEducativa.setCreditos(resultado.getInt("creditos"));
                     
                     ProgramaEducativo programaEducativo = new ProgramaEducativo();
                     programaEducativo.setNombreProgramaEducativo(resultado.getString("nombreProgramaEducativo"));
@@ -76,18 +81,25 @@ public class TrabajoDocenteDAO {
                     Bloque bloque = new Bloque();
                     bloque.setNombreBloque(resultado.getString("nombreBloque"));
                     
+                    Director director = new Director();
+                    director.setNombreDirector(resultado.getString("nombreDirector"));
+                    director.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    director.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    
                     experienciaEducativa.setProgramaEducativo(programaEducativo);
                     experienciaEducativa.setPeriodo(periodo);
                     experienciaEducativa.setBloque(bloque);
                     experienciaEducativa.setSeccion(seccion);
                     trabajo.setExperienciaEducativa(experienciaEducativa);
                     trabajo.setTipoTrabajo(tipo);
+                    trabajo.setDirector(director);
                     
                     listaTrabajos.add(trabajo);
                 }
                 respuesta = Constantes.OPERACION_EXITOSA;
                 conexionBD.close();
             }catch(SQLException e){
+                System.out.println(e);
                 respuesta = Constantes.ERROR_CONSULTA;
                 listaTrabajos = null;
             }
