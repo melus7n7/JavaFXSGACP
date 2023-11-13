@@ -40,14 +40,19 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Por Cambiar Con Inicio Sesion
+        /*Por Cambiar Con Inicio Sesion
             docente = new Usuario();
             docente.setNoPersonal("59715493");
             docente.setNombre("Sulem");
             docente.setApellidoPaterno("Martínez");
             docente.setApellidoMaterno("Aguilar");
             mostrarInformacionPantalla();
-        //Fin Del Cambio
+        //Fin Del Cambio*/
+    }
+    
+    public void inicializarPantallaDocente(Usuario docente){
+        this.docente = docente;
+        mostrarInformacionPantalla();
     }
 
     @FXML
@@ -69,12 +74,25 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
 
     @FXML
     private void clickSalir(MouseEvent event) {
-        //Ir Inicio Sesion
+        salirInicioSesion();
     }
     
     private void mostrarInformacionPantalla(){
         String nombreCompleto = docente.getNombre().toUpperCase() + " " + docente.getApellidoPaterno().toUpperCase() +
                 " " + docente.getApellidoMaterno().toUpperCase();
         lblNombreDocente.setText(nombreCompleto);
+    }
+    
+    private void salirInicioSesion(){
+        Stage stage = (Stage) this.lblNombreDocente.getScene().getWindow();  
+        Parent root;
+        try {
+            root = FXMLLoader.load(JavaFXSGACP.class.getResource("vistas/FXMLInicioSesion.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle("Inicio Sesion");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 }

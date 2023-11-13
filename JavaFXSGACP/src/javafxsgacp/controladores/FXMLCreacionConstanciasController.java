@@ -109,7 +109,6 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
         mostrarTrabajosConConstancias = false;
         ancPaneInformacionConstancia.setVisible(false);
         cargarTiposTrabajo();
-        recuperarFirmaDigital();
         cmbBoxTiposRegistro.valueProperty().addListener(new ChangeListener<TipoTrabajoDocente>(){
             @Override
             public void changed(ObservableValue<? extends TipoTrabajoDocente> observable, TipoTrabajoDocente oldValue, TipoTrabajoDocente newValue) {
@@ -139,6 +138,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
     public void inicializarPantalla(Usuario docente){
         this.docente = docente;
         prepararDatosVentana();
+        recuperarFirmaDigital();
     }
     
     private void prepararDatosVentana(){
@@ -178,6 +178,7 @@ public class FXMLCreacionConstanciasController implements Initializable, INotifi
             FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLMenuPrincipalDocentes.fxml"));
             Parent vista = accesoControlador.load();
             FXMLMenuPrincipalDocentesController menuDocentes = accesoControlador.getController();
+            menuDocentes.inicializarPantallaDocente(docente);
             
             escenarioBase.setScene(new Scene (vista));
             escenarioBase.setTitle("Menú Principal Docentes");
