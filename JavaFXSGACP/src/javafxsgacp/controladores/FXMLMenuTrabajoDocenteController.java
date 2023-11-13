@@ -6,14 +6,20 @@ package javafxsgacp.controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author monti
  */
-public class MenuTrabajoDocenteControllerController implements Initializable {
+public class FXMLMenuTrabajoDocenteController implements Initializable {
+
+    @FXML
+    private Label lblNombreAdministrativo;
 
     /**
      * Initializes the controller class.
@@ -22,5 +28,13 @@ public class MenuTrabajoDocenteControllerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clickGenerarConstancia(MouseEvent event) {
+    }
+
+    @FXML
+    private void clicImpartirEE(MouseEvent event) {
+    }
     
 }

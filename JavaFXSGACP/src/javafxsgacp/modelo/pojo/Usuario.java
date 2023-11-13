@@ -13,6 +13,7 @@ import java.util.Date;
 public class Usuario {
     private String noPersonal;
     private String correoElectronico;
+    private String contraseña;
     private TipoUsuario tipoUsuario;
     private Date fechaNacimiento;
     private String nombre;
@@ -22,7 +23,14 @@ public class Usuario {
 
     public Usuario() {
     }
+    
+    public String getContraseña() {
+        return contraseña;
+    }
 
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
     public String getNoPersonal() {
         return noPersonal;
     }

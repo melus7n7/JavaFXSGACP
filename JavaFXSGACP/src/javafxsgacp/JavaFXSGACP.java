@@ -21,8 +21,9 @@ public class JavaFXSGACP extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLInicioSesion.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setResizable(true);
         stage.setScene(scene);
+        stage.setTitle("Inicio Sesión");
         stage.show();
     }
 

@@ -8,7 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.util.Pair;
 import javafxsgacp.modelo.ConexionBD;
+import javafxsgacp.modelo.pojo.TipoUsuario;
+import javafxsgacp.modelo.pojo.Usuario;
 import javafxsgacp.utilidades.Constantes;
 
 /**
@@ -16,37 +19,46 @@ import javafxsgacp.utilidades.Constantes;
  * @author monti
  */
 public class CuentaDAO {
-    public Constantes recuperarUsuario()
+    public Pair<Constantes, Usuario> recuperarUsuario(String CorreoElectronico, String Contraseña)
     {
         Connection conexion = ConexionBD.abrirConexionBD();
         if(conexion!=null){
             try{
-                String consulta = "SELECT cuenta.correoElectronico, usuario.noPersonal, usuario.nombre, usuario.apellidoPaterno, usuario.apellidoMaterno, idTipoUsuario " +
+                String consulta = "SELECT cuenta.correoElectronico, cuenta.contraseña, usuario.noPersonal, usuario.nombre, "+
+                "usuario.apellidoPaterno, usuario.apellidoMaterno, tipoUsuario.idTipoUsuario, tipoUsuario.nombreTipo " +
                 "from cuenta " +
-                "INNER JOIN usuario on cuenta.correoElectronico=usuario.correoElectronico and cuenta.correoElectronico= ? and cuenta.contraseña= ? ;";
+                "INNER JOIN usuario on cuenta.correoElectronico=usuario.correoElectronico and (cuenta.correoElectronico= ? or cuenta.contraseña= ? )"+
+                "INNER JOIN tipoUsuario on tipoUsuario.idTipoUsuario=usuario.idTipoUsuario;";
                 PreparedStatement sentencia= conexion.prepareStatement(consulta); 
-                sentencia.setString(1, "Jacobobo@gmail.com");                
-                sentencia.setString(2, "1234567890");    
+                sentencia.setString(1, CorreoElectronico);                
+                sentencia.setString(2, Contraseña);    
                 ResultSet filasAfectadas  = sentencia.executeQuery();
-                if(filasAfectadas.next())
+                while(filasAfectadas.next())
                 {
-                    System.out.print("Correo "+filasAfectadas.getString("correoElectronico"));
-                    System.out.print("noPersonal "+filasAfectadas.getString("noPersonal"));
-                    System.out.print("nombre "+filasAfectadas.getString("nombre"));
-                    System.out.print("apellidoPaterno "+filasAfectadas.getString("apellidoPaterno"));
-                    System.out.print("apellidoMaterno "+filasAfectadas.getString("apellidoMaterno"));
-                    System.out.print("idTipoUsuario "+filasAfectadas.getInt("idTipoUsuario"));
-                    return Constantes.OPERACION_EXITOSA;                    
-                }else
-                {
-                    return Constantes.OPERACION_VACIA;                    
+                    Usuario usuario = new Usuario();
+                    TipoUsuario tipoUsuario = new TipoUsuario();
+                    usuario.setCorreoElectronico(filasAfectadas.getString("correoElectronico"));
+                    usuario.setContraseña(filasAfectadas.getString("contraseña"));
+                    usuario.setNoPersonal(filasAfectadas.getString("noPersonal"));
+                    usuario.setNombre(filasAfectadas.getString("nombre"));
+                    usuario.setApellidoPaterno(filasAfectadas.getString("apellidoPaterno"));
+                    usuario.setApellidoMaterno(filasAfectadas.getString("apellidoMaterno"));
+                    tipoUsuario.setIdTipoUsuario(filasAfectadas.getInt("idTipoUsuario"));
+                    tipoUsuario.setNombreTipo(filasAfectadas.getString("nombreTipo"));
+                    usuario.setTipoUsuario(tipoUsuario);
+                    if(usuario.getContraseña().equals(Contraseña) && usuario.getCorreoElectronico().equals(CorreoElectronico)){
+                        return new Pair<>(Constantes.OPERACION_EXITOSA, usuario);                    
+                    } else if(usuario.getCorreoElectronico().equals(CorreoElectronico)){
+                        return new Pair<>(Constantes.OPERACION_EXITOSA, usuario);                    
+                    }
                 }
-                
+                return new Pair<>(Constantes.OPERACION_VACIA, null);                    
+
             }catch(SQLException ex){
-                return Constantes.ERROR_CONSULTA;
+                return new Pair<>(Constantes.ERROR_CONSULTA, null);
             }
         }else{
-            return Constantes.ERROR_CONEXION_BD;
+            return new Pair<>(Constantes.ERROR_CONEXION_BD, null);
         }
     }
 }
