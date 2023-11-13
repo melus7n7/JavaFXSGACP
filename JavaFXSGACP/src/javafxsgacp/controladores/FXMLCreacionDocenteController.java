@@ -13,6 +13,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -28,6 +29,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafxsgacp.modelo.dao.TipoUsuarioDAO;
+import javafxsgacp.modelo.pojo.TipoUsuario;
+import javafxsgacp.modelo.pojo.TipoUsuarioRespuesta;
 import javafxsgacp.utilidades.Utilidades;
 import javax.imageio.ImageIO;
 
@@ -50,14 +54,13 @@ public class FXMLCreacionDocenteController implements Initializable {
     @FXML
     private TextField tfNumPersonal;
     @FXML
-    private ComboBox<?> cbTipoUsuario;
+    private ComboBox<TipoUsuario> cbTipoUsuario;
     @FXML
     private Button btnSeleccionarFirmaDigital;
     @FXML
     private ImageView imgFirmaDigital;
     
-    private ObservableList<?> usuarios;
-    private boolean esEdicion;
+    private ObservableList<TipoUsuario> usuarios;
     private File archivoQR;
     String estiloError = "-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 2;";
     String estiloNormal = "-fx-border-width: 0;";
@@ -97,13 +100,34 @@ public class FXMLCreacionDocenteController implements Initializable {
         }
         btnSeleccionarFirmaDigital.setVisible(false);
     }
+    /*
+    private void cargarTiposUsuarios(){
+        usuarios = FXCollections.observableArrayList();
+        TipoUsuarioRespuesta usuariosBD = TipoUsuarioDAO.obtenerInformacionFacultad();
+        switch(usuariosBD.getCodigoRespuesta()){
+            case codigoRespuesta = ERROR_CONEXION:
+                Utilidades.mostrarDialogoSimple("Error de conexion",
+                        "Error en la conexión con la base de datos.",
+                        Alert.AlertType.ERROR);
+                break;
+            case Constantes.ERROR_CONSULTA:
+                Utilidades.mostrarDialogoSimple("Error de consulta",
+                       "Por el momento no se puede obtener la información.",
+                       Alert.AlertType.INFORMATION);
+                break;
+            case Constantes.OPERACION_EXITOSA:
+                facultades.addAll(facultadesBD.getFacultades());
+                cbFacultad.setItems(facultades);
+                break;
+        }
+    }*/
     
     private void validarCamposRegistro(){
         
         establecerEstiloNormal();
         boolean datosValidos = true;
         String numPersonal = tfNumPersonal.getText();
-        //String tipoUsuario = combo
+        int posicionUsuario = cbTipoUsuario.getSelectionModel().getSelectedIndex();
         String nombre = tfNombre.getText();
         String apellidoPaterno = tfApellidoPaterno.getText();
         String apellidoMaterno = tfApellidoMaterno.getText();
@@ -134,6 +158,11 @@ public class FXMLCreacionDocenteController implements Initializable {
         
         if(fechaNacimiento == null){
             dpFechaNacimiento.setStyle(estiloError);
+            datosValidos = false;
+        }
+        
+        if(posicionUsuario == -1){
+            cbTipoUsuario.setStyle(estiloError);
             datosValidos = false;
         }
         

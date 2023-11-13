@@ -1,13 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+*Autor: Mongeote Tlachy Daniel
+*Fecha de creación: 12/11/2023
+*Fecha de modificación: 12/11/2023
+*Descripción: POJO del tipo de usuario
+*/
 package javafxsgacp.modelo.pojo;
 
-/**
- *
- * @author sulem
- */
 public class TipoUsuario {
     private int idTipoUsuario;
     private String nombreTipo;
@@ -30,5 +28,4 @@ public class TipoUsuario {
     public void setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
     }
-    
 }

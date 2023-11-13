@@ -1,20 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+*Autor: Mongeote Tlachy Daniel, Martínez Aguilar Sulem
+*Fecha de creación: 12/11/2023
+*Fecha de modificación: 12/11/2023
+*Descripción: POJO del usuario
+*/
 package javafxsgacp.modelo.pojo;
 
 import java.util.Date;
 
-/**
- *
- * @author sulem
- */
 public class Usuario {
     private String noPersonal;
     private String correoElectronico;
-    private TipoUsuario tipoUsuario;
-    private Date fechaNacimiento;
+    private int tipoUsuario;
+    private String fechaNacimiento;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -31,11 +29,11 @@ public class Usuario {
         return correoElectronico;
     }
 
-    public TipoUsuario getTipoUsuario() {
+    public int getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -63,11 +61,11 @@ public class Usuario {
         this.correoElectronico = correoElectronico;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+    public void setTipoUsuario(int tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -86,6 +84,4 @@ public class Usuario {
     public void setFirmaDigital(byte[] firmaDigital) {
         this.firmaDigital = firmaDigital;
     }
-    
-    
 }

@@ -63,11 +63,6 @@
                </font>
             </Label>
             <DatePicker fx:id="dpFechaNacimiento" layoutX="43.0" layoutY="235.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/EstiloDatePicker.css" />
-            <Label layoutX="292.0" layoutY="203.0" text="Firma digital:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
             <Label layoutX="43.0" layoutY="305.0" text="Correo Electrónico:">
                <font>
                   <Font size="16.0" />
@@ -99,19 +94,6 @@
                   <Font name="Futura Md BT Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnSeleccionarFirmaDigital" layoutX="277.0" layoutY="232.0" mnemonicParsing="false" onAction="#clicSeleccionarFirmaDigital" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: #034f75;" text="Seleccionar" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Pane layoutX="464.0" layoutY="182.0" prefHeight="117.0" prefWidth="174.0" style="-fx-background-color: white;">
-               <children>
-                  <ImageView fx:id="imgFirmaDigital" fitHeight="117.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </Pane>
          </children>
       </AnchorPane>
    </children>
