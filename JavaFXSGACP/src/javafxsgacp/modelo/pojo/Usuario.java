@@ -37,14 +37,6 @@ public class Usuario {
         return correoElectronico;
     }
 
-    public int getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -61,20 +53,28 @@ public class Usuario {
         return firmaDigital;
     }
 
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public void setNoPersonal(String noPersonal) {
         this.noPersonal = noPersonal;
     }
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
-    }
-
-    public void setTipoUsuario(int tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setNombre(String nombre) {

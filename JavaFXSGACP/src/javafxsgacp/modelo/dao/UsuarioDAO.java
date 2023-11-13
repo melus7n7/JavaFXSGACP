@@ -56,12 +56,12 @@ public class UsuarioDAO {
                                     " VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
                 PreparedStatement prepararSentencia =  conexionBD.prepareStatement(sentencia);
                 prepararSentencia.setString(1, usuarioNuevo.getNoPersonal());
-                prepararSentencia.setString(2, usuarioNuevo.getFechaNacimiento());
+                //prepararSentencia.setString(2, usuarioNuevo.getFechaNacimiento());
                 prepararSentencia.setString(3, usuarioNuevo.getNombre());
                 prepararSentencia.setString(4, usuarioNuevo.getApellidoPaterno());
                 prepararSentencia.setString(5, usuarioNuevo.getApellidoMaterno());
                 prepararSentencia.setString(6, usuarioNuevo.getCorreoElectronico());
-                prepararSentencia.setInt(7, usuarioNuevo.getTipoUsuario());
+                //prepararSentencia.setInt(7, usuarioNuevo.getTipoUsuario());
                 prepararSentencia.setBytes(8, usuarioNuevo.getFirmaDigital());
                 int filasAfectadas = prepararSentencia.executeUpdate();
                 respuesta = Constantes.OPERACION_EXITOSA;
