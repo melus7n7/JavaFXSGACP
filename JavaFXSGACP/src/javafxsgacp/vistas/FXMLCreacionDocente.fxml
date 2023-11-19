@@ -44,25 +44,25 @@
                </font>
             </Label>
             <TextField fx:id="tfNombre" layoutX="42.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. Erika" />
-            <Label layoutX="42.0" layoutY="39.0" text="Número de Personal:">
+            <Label layoutX="264.0" layoutY="31.0" text="Número de Personal:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="tfNumPersonal" layoutX="42.0" layoutY="71.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. S21013830" />
+            <TextField fx:id="tfNumPersonal" layoutX="252.0" layoutY="64.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. S21013830" />
             <TextField fx:id="tfApellidoPaterno" layoutX="252.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. Meneses" />
             <TextField fx:id="tfApellidoMaterno" layoutX="464.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. Rico" />
-            <Label layoutX="255.0" layoutY="39.0" text="Tipo de usuario:">
+            <Label layoutX="348.0" layoutY="203.0" text="Tipo de usuario:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="203.0" text="Fecha de nacimiento:">
+            <Label layoutX="92.0" layoutY="203.0" text="Fecha de nacimiento:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <DatePicker fx:id="dpFechaNacimiento" layoutX="43.0" layoutY="235.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/EstiloDatePicker.css" />
+            <DatePicker fx:id="dpFechaNacimiento" layoutX="92.0" layoutY="235.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/EstiloDatePicker.css" />
             <Label layoutX="43.0" layoutY="305.0" text="Correo Electrónico:">
                <font>
                   <Font size="16.0" />
@@ -81,12 +81,20 @@
             </Label>
             <TextField fx:id="tfCorreoAlterno" layoutX="251.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. menesesrico@uv.mx" />
             <TextField fx:id="tfContrasenia" layoutX="464.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. asnv!#$#%45" />
-            <ComboBox fx:id="cbTipoUsuario" layoutX="255.0" layoutY="71.0" opacity="0.5" prefHeight="25.0" prefWidth="174.0" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/Estilo.css">
+            <ComboBox fx:id="cbTipoUsuario" layoutX="348.0" layoutY="235.0" prefHeight="25.0" prefWidth="174.0" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/Estilo.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ComboBox>
-            <Button layoutX="297.0" layoutY="396.0" mnemonicParsing="false" onAction="#clicGuardarRegistroDocente" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #034f75;" text="Guardar" textFill="WHITE">
+            <Button layoutX="348.0" layoutY="396.0" mnemonicParsing="false" onAction="#clicGuardarRegistroDocente" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #034f75;" text="Guardar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Futura Md BT Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="129.0" layoutY="396.0" mnemonicParsing="false" onAction="#clicCancelarRegistroDocente" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #034f75;" text="Cancelar" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

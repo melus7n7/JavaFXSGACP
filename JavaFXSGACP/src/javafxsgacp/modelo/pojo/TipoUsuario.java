@@ -28,4 +28,10 @@ public class TipoUsuario {
     public void setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
     }
+    
+    @Override
+    public String toString() {
+        return nombreTipo;
+    }
+    
 }

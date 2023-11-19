@@ -76,10 +76,10 @@ public class FXMLInicioSesionController implements Initializable {
             switch (respuestaConstante) {
                 case OPERACION_EXITOSA:
                     if(respuestaUsuario.getContraseña().equals(contraseña)){
-                        if(respuestaUsuario.getTipoUsuario().getIdTipoUsuario()==1){
+                        if(respuestaUsuario.getIdTipoUsuario()==1){
                             Utilidades.mostrarDialogoSimple("Usuario encontrado", "Ingresando a menú", Alert.AlertType.INFORMATION);
                             irMenuPrincipalAdministrativo();
-                        }else if(respuestaUsuario.getTipoUsuario().getIdTipoUsuario()==2){
+                        }else if(respuestaUsuario.getIdTipoUsuario()==2){
                             irMenuPrincipalDocente(respuestaUsuario);
                         }
                     }else{

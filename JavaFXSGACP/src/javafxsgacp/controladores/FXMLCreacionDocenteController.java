@@ -6,34 +6,27 @@
 */
 package javafxsgacp.controladores;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafxsgacp.modelo.dao.TipoUsuarioDAO;
+import javafxsgacp.modelo.dao.UsuarioDAO;
 import javafxsgacp.modelo.pojo.TipoUsuario;
-import javafxsgacp.modelo.pojo.TipoUsuarioRespuesta;
+import javafxsgacp.modelo.pojo.Usuario;
+import javafxsgacp.utilidades.Constantes;
 import javafxsgacp.utilidades.Utilidades;
-import javax.imageio.ImageIO;
 
 public class FXMLCreacionDocenteController implements Initializable {
 
@@ -55,19 +48,15 @@ public class FXMLCreacionDocenteController implements Initializable {
     private TextField tfNumPersonal;
     @FXML
     private ComboBox<TipoUsuario> cbTipoUsuario;
-    @FXML
-    private Button btnSeleccionarFirmaDigital;
-    @FXML
-    private ImageView imgFirmaDigital;
     
     private ObservableList<TipoUsuario> usuarios;
-    private File archivoQR;
     String estiloError = "-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 2;";
     String estiloNormal = "-fx-border-width: 0;";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dpFechaNacimiento.setEditable(false);
+        usuarios = FXCollections.observableArrayList();
+        cargarInformacionTiposUsuarios();
     }    
 
     @FXML
@@ -77,53 +66,26 @@ public class FXMLCreacionDocenteController implements Initializable {
     
     @FXML
     private void clicRegresar(MouseEvent event) {
-        Stage escenarioBase = (Stage) tfNombre.getScene().getWindow();
-        escenarioBase.close();
+        cerrarVentana();
     }
-
+    
     @FXML
-    private void clicSeleccionarFirmaDigital(ActionEvent event) {
-        FileChooser dialogoSeleccionImg = new FileChooser();
-        dialogoSeleccionImg.setTitle("Selecciona una imagen");
-        FileChooser.ExtensionFilter filtroDialogo = new FileChooser.ExtensionFilter("Archivos PNG (*.png)", "*.PNG");
-        dialogoSeleccionImg.getExtensionFilters().add(filtroDialogo);
-        Stage escenarioBase = (Stage) tfNombre.getScene().getWindow();
-        archivoQR = dialogoSeleccionImg.showOpenDialog(escenarioBase);
-        if(archivoQR != null){
-            try {
-                BufferedImage bufferImg = ImageIO.read(archivoQR);
-                Image imagenDecodificada =SwingFXUtils.toFXImage(bufferImg, null);
-                imgFirmaDigital.setImage(imagenDecodificada);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        btnSeleccionarFirmaDigital.setVisible(false);
+    private void clicCancelarRegistroDocente(ActionEvent event) {
+        cerrarVentana();
     }
-    /*
-    private void cargarTiposUsuarios(){
-        usuarios = FXCollections.observableArrayList();
-        TipoUsuarioRespuesta usuariosBD = TipoUsuarioDAO.obtenerInformacionFacultad();
-        switch(usuariosBD.getCodigoRespuesta()){
-            case codigoRespuesta = ERROR_CONEXION:
-                Utilidades.mostrarDialogoSimple("Error de conexion",
-                        "Error en la conexión con la base de datos.",
-                        Alert.AlertType.ERROR);
-                break;
-            case Constantes.ERROR_CONSULTA:
-                Utilidades.mostrarDialogoSimple("Error de consulta",
-                       "Por el momento no se puede obtener la información.",
-                       Alert.AlertType.INFORMATION);
-                break;
-            case Constantes.OPERACION_EXITOSA:
-                facultades.addAll(facultadesBD.getFacultades());
-                cbFacultad.setItems(facultades);
-                break;
-        }
-    }*/
+    
+    private void cerrarVentana(){
+        Stage escenarioActual = (Stage) tfNombre.getScene().getWindow();
+        escenarioActual.close();
+    }
+    
+    private void cargarInformacionTiposUsuarios(){
+        List<TipoUsuario> resultado = TipoUsuarioDAO.obtenerTiposUsuarios();
+        usuarios.addAll(resultado);
+        cbTipoUsuario.setItems(usuarios);
+    }
     
     private void validarCamposRegistro(){
-        
         establecerEstiloNormal();
         boolean datosValidos = true;
         String numPersonal = tfNumPersonal.getText();
@@ -180,50 +142,39 @@ public class FXMLCreacionDocenteController implements Initializable {
             tfContrasenia.setStyle(estiloError);
             datosValidos = false;
         }
-        /*
+        
         if(datosValidos){
-            Alumno alumnoValidado = new Alumno();
-            alumnoValidado.setNombre(nombre);
-            alumnoValidado.setApellidoPaterno(apellidoPaterno);
-            alumnoValidado.setApellidoMaterno(apellidoMaterno);
-            alumnoValidado.setMatricula(matricula);
-            alumnoValidado.setCorreo(correo);
-            alumnoValidado.setFechaNacimiento(fechaNacimiento.toString());
-            alumnoValidado.setIdCarrera(carreras.get(posicionCarrera).getIdCarrera()); //estamos seguros que tiene algo
-            try{
-                if(esEdicion){
-                    if(archivoFoto != null || alumnoEdicion.getFoto().length  > 0){
-                        if(archivoFoto != null){
-                            alumnoValidado.setFoto(Files.readAllBytes(archivoFoto.toPath()));
-                        }else{
-                            alumnoValidado.setFoto(alumnoEdicion.getFoto());
-                        }
-                        alumnoValidado.setIdAlumno(alumnoEdicion.getIdAlumno());
-                        actualizarAlumno(alumnoValidado);
-                    }else{
-                        Utilidades.mostrarDialogoSimple("Error con el archivo",
-                        "Hubo un error al intentar guardar la imagen, vuelva a seleccionar el archivo.",
-                        Alert.AlertType.ERROR);
-                    }
-                }else{ //nuevo registro
-                    //File -> byte[]
-                    if(archivoFoto != null){
-                        alumnoValidado.setFoto(Files.readAllBytes(archivoFoto.toPath())); //Files es una clase de utilidad que contiene metodos propios
-                        registrarAlumno(alumnoValidado);
-                    }else{
-                        Utilidades.mostrarDialogoSimple("Selecciona una imagen",
-                                "Para guardar el registro del alumno debes seleccionar su foto desde la opción Seleccionar foto",
-                                Alert.AlertType.WARNING);
-                    }
-                }
-            }catch(IOException e){
-                e.printStackTrace();
-                Utilidades.mostrarDialogoSimple("Error con el archivo",
-                        "Hubo un error al intentar guardar la imagen, vuelva a seleccionar el archivo.",
-                        Alert.AlertType.ERROR);
-            }
+            Usuario usuarioValidado = new Usuario();
+            usuarioValidado.setNoPersonal(numPersonal);
+            usuarioValidado.setNombre(nombre);
+            usuarioValidado.setApellidoPaterno(apellidoPaterno);
+            usuarioValidado.setApellidoMaterno(apellidoMaterno);
+            usuarioValidado.setCorreoElectronico(correoPrincipal);
+            usuarioValidado.setCorreoElectronicoAlterno(correoAlterno);
+            usuarioValidado.setContraseña(contrasenia);
+            usuarioValidado.setFechaNacimiento(fechaNacimiento.toString());
+            TipoUsuario tipoUsuario = cbTipoUsuario.getSelectionModel().getSelectedItem();
+            usuarioValidado.setIdTipoUsuario(tipoUsuario.getIdTipoUsuario());
+            registrarUsuario(usuarioValidado);
         }
-        */
+    }
+    
+    private void registrarUsuario(Usuario usuarioRegistro){
+        Constantes respuesta = UsuarioDAO.guardarUsuario(usuarioRegistro);
+        switch(respuesta){
+            case ERROR_CONEXION_BD:
+                Utilidades.mostrarDialogoSimple("Error de conexión", "Error en la conexión con la base de datos", Alert.AlertType.ERROR);
+                break;
+            case ERROR_CONSULTA:
+                Utilidades.mostrarDialogoSimple("Error de consulta", "Error en la consulta con la base de datos", Alert.AlertType.ERROR);
+                break;
+            case OPERACION_EXITOSA:
+                Utilidades.mostrarDialogoSimple("Usuario registrado",
+                        "La información del usuario fue guardada correctamente",
+                        Alert.AlertType.INFORMATION);
+                cerrarVentana();
+                break;
+        }
     }
     
     private void establecerEstiloNormal(){

@@ -11,38 +11,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javafxsgacp.modelo.ConexionBD;
 import javafxsgacp.modelo.pojo.TipoUsuario;
-import javafxsgacp.modelo.pojo.TipoUsuarioRespuesta;
-import javafxsgacp.utilidades.Constantes;
 
 public class TipoUsuarioDAO {
-    public static TipoUsuarioRespuesta obtenerInformacionFacultad() {
-        TipoUsuarioRespuesta respuesta = new TipoUsuarioRespuesta();
+    public static List<TipoUsuario> obtenerTiposUsuarios(){
+        List<TipoUsuario> tiposUsuarios = new ArrayList<>();
         Connection conexionBD = ConexionBD.abrirConexionBD();
-        respuesta.setCodigoRespuesta(Constantes.OPERACION_EXITOSA);
-        if (conexionBD != null) {
-            try {
-                String consulta = "SELECT * FROM TipoUsuario"; 
+        if(conexionBD != null){
+            try{
+                String consulta = "SELECT * FROM tipousuario";
                 PreparedStatement prepararSentencia = conexionBD.prepareStatement(consulta);
                 ResultSet resultado = prepararSentencia.executeQuery();
-                ArrayList<TipoUsuario> tipoUsuariosConsulta = new ArrayList();
-                while (resultado.next())
-                {
-                    TipoUsuario tipoUsuarios = new TipoUsuario();
-                    tipoUsuarios.setIdTipoUsuario(resultado.getInt("idTipoUsuario"));
-                    tipoUsuarios.setNombreTipo(resultado.getString("nombreTipo"));
-                    tipoUsuariosConsulta.add(tipoUsuarios);
+                while(resultado.next()){
+                    TipoUsuario usuario = new TipoUsuario();
+                    usuario.setIdTipoUsuario(resultado.getInt("idTipoUsuario"));
+                    usuario.setNombreTipo(resultado.getString("nombreTipo"));
+                    tiposUsuarios.add(usuario);
                 }
-                respuesta.setUsuarios(tipoUsuariosConsulta);
                 conexionBD.close();
-            } catch (SQLException e) {
+            }catch(SQLException e){
                 e.printStackTrace();
-                respuesta.setCodigoRespuesta(Constantes.ERROR_CONSULTA);
             }
-        } else {
-            respuesta.setCodigoRespuesta(Constantes.ERROR_CONEXION_BD);
         }
-        return respuesta;
+        return tiposUsuarios;
     }
 }

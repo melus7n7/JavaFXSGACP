@@ -45,7 +45,6 @@ public class CuentaDAO {
                     usuario.setApellidoMaterno(filasAfectadas.getString("apellidoMaterno"));
                     tipoUsuario.setIdTipoUsuario(filasAfectadas.getInt("idTipoUsuario"));
                     tipoUsuario.setNombreTipo(filasAfectadas.getString("nombreTipo"));
-                    usuario.setTipoUsuario(tipoUsuario);
                     if(usuario.getContraseña().equals(Contraseña) && usuario.getCorreoElectronico().equals(CorreoElectronico)){
                         return new Pair<>(Constantes.OPERACION_EXITOSA, usuario);                    
                     } else if(usuario.getCorreoElectronico().equals(CorreoElectronico)){
