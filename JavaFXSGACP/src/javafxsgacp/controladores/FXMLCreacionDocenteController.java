@@ -27,6 +27,7 @@ import javafxsgacp.modelo.pojo.TipoUsuario;
 import javafxsgacp.modelo.pojo.Usuario;
 import javafxsgacp.utilidades.Constantes;
 import javafxsgacp.utilidades.Utilidades;
+import static javafxsgacp.utilidades.Utilidades.caracteresValidos;
 
 public class FXMLCreacionDocenteController implements Initializable {
 
@@ -88,6 +89,8 @@ public class FXMLCreacionDocenteController implements Initializable {
     private void validarCamposRegistro(){
         establecerEstiloNormal();
         boolean datosValidos = true;
+        boolean alertaMostrada = false;
+        
         String numPersonal = tfNumPersonal.getText();
         int posicionUsuario = cbTipoUsuario.getSelectionModel().getSelectedIndex();
         String nombre = tfNombre.getText();
@@ -98,52 +101,55 @@ public class FXMLCreacionDocenteController implements Initializable {
         String correoAlterno = tfCorreoAlterno.getText();
         String contrasenia = tfContrasenia.getText();
         
-        if(numPersonal.length() != 9){
-            tfNumPersonal.setStyle(estiloError);
+        if (numPersonal.isEmpty() || posicionUsuario == -1 || nombre.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty() || fechaNacimiento == null || correoPrincipal.isEmpty() || correoAlterno.isEmpty() || contrasenia.isEmpty()) {
             datosValidos = false;
+
+            if (numPersonal.isEmpty()) {
+                tfNumPersonal.setStyle(estiloError);
+            }
+            if (posicionUsuario == -1) {
+            }
+            if (nombre.isEmpty()) {
+                tfNombre.setStyle(estiloError);
+            }
+            if (apellidoPaterno.isEmpty()) {
+                tfApellidoPaterno.setStyle(estiloError);
+            }
+            if (apellidoMaterno.isEmpty()) {
+                tfApellidoMaterno.setStyle(estiloError);
+            }
+            if (fechaNacimiento == null) {
+            }
+            if (correoPrincipal.isEmpty()) {
+                tfCorreoPrincipal.setStyle(estiloError);
+            }
+            if (correoAlterno.isEmpty()) {
+                tfCorreoAlterno.setStyle(estiloError);
+            }
+            if (contrasenia.isEmpty()) {
+                tfContrasenia.setStyle(estiloError);
+            }
+            datosValidos = false;
+            alertaMostrada = true;
+            Utilidades.mostrarDialogoSimple("CamposVacios", "Error. Hay campos vacíos. Complételos o cámbielos para continuar", Alert.AlertType.ERROR);
+
+        } else if (!caracteresValidos(nombre) || !caracteresValidos(apellidoPaterno) || !caracteresValidos(apellidoMaterno)) {
+            if (!caracteresValidos(nombre)) {
+                tfNombre.setStyle(estiloError);
+            }
+            if (!caracteresValidos(apellidoPaterno)) {
+                tfApellidoPaterno.setStyle(estiloError);
+            }
+            if (!caracteresValidos(apellidoMaterno)) {
+                tfApellidoMaterno.setStyle(estiloError);
+            }
+
+            datosValidos = false;
+            alertaMostrada = true;
+            Utilidades.mostrarDialogoSimple("CamposErroneos", "Error. Hay campos erróneos. Complételos o cámbielos para continuar.", Alert.AlertType.ERROR);
         }
         
-        if(nombre.isEmpty()){
-            tfNombre.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(apellidoPaterno.isEmpty()){
-            tfApellidoPaterno.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(apellidoMaterno.isEmpty()){
-            tfApellidoMaterno.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(fechaNacimiento == null){
-            dpFechaNacimiento.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(posicionUsuario == -1){
-            cbTipoUsuario.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(!Utilidades.correoValido(correoPrincipal)){
-            tfCorreoPrincipal.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(!Utilidades.correoValido(correoAlterno)){
-            tfCorreoAlterno.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(contrasenia.length() != 9){
-            tfContrasenia.setStyle(estiloError);
-            datosValidos = false;
-        }
-        
-        if(datosValidos){
+        if (datosValidos && !alertaMostrada) {
             Usuario usuarioValidado = new Usuario();
             usuarioValidado.setNoPersonal(numPersonal);
             usuarioValidado.setNombre(nombre);

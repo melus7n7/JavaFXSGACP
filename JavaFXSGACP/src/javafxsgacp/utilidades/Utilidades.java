@@ -45,12 +45,19 @@ public class Utilidades {
     
     public static boolean correoValido(String correo){
         if(correo != null && !correo.isEmpty()){
-            Pattern patronCorreo = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+))+");
+            Pattern patronCorreo = Pattern.compile("[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9.]+");
             Matcher matchPatron = patronCorreo.matcher(correo); 
-            return matchPatron.find();
-        }else{
+            return matchPatron.matches();
+        } else {
             return false;
         }
+    }
+    
+    public static boolean caracteresValidos(String texto) {
+        String regex = "^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“ÃšÃ±Ã‘Ã¼Ãœ\\s]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        return matcher.matches();
     }
     
     public static String formatoFechaEscrito(Date fecha){
