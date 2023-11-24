@@ -27,17 +27,17 @@
             <Font name="Bodoni MT" size="40.0" />
          </font>
       </Label>
-      <Label layoutX="17.0" layoutY="361.0" text="Docente Encargado:">
+      <Label layoutX="115.0" layoutY="379.0" text="Docente Encargado:">
          <font>
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="346.0" layoutY="361.0" text="Horas Impartidas">
+      <Label layoutX="722.0" layoutY="241.0" text="Horas Impartidas">
          <font>
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="18.0" layoutY="240.0" text="Experiencia Educativa:">
+      <Label layoutX="556.0" layoutY="109.0" text="Experiencia Educativa:">
          <font>
             <Font name="Bodoni MT" size="30.0" />
          </font>
@@ -47,32 +47,31 @@
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="559.0" layoutY="109.0" text="Bloque:">
+      <Label layoutX="17.0" layoutY="241.0" text="Bloque:">
          <font>
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="800.0" layoutY="109.0" text="Sección:">
+      <Label layoutX="269.0" layoutY="241.0" text="Sección:">
          <font>
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="458.0" layoutY="241.0" text="Creditos:">
+      <Label layoutX="540.0" layoutY="241.0" text="Creditos">
          <font>
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbBoxDocente" layoutX="701.0" layoutY="321.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
-      <ComboBox fx:id="cmbBoxExperienciaEducativa" layoutX="17.0" layoutY="297.0" prefHeight="40.0" prefWidth="355.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
+      <ComboBox fx:id="cmbBoxExperienciaEducativa" layoutX="555.0" layoutY="166.0" prefHeight="40.0" prefWidth="422.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
       <ComboBox fx:id="cmbBoxPeriodo" layoutX="322.0" layoutY="166.0" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
-      <ComboBox fx:id="cmbBoxBloque" layoutX="559.0" layoutY="166.0" prefHeight="40.0" prefWidth="212.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
-      <ComboBox fx:id="cmbBoxSeccion" layoutX="800.0" layoutY="166.0" prefHeight="40.0" prefWidth="212.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
-      <Label fx:id="lblCantidadHoras" layoutX="443.0" layoutY="422.0" text="08">
+      <ComboBox fx:id="cmbBoxBloque" layoutX="17.0" layoutY="298.0" prefHeight="40.0" prefWidth="212.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
+      <ComboBox fx:id="cmbBoxSeccion" layoutX="269.0" layoutY="298.0" prefHeight="40.0" prefWidth="212.0" style="-fx-background-color: #034f75;" stylesheets="@Estilo.css" />
+      <Label fx:id="lblCantidadHoras" layoutX="819.0" layoutY="302.0" text="08">
          <font>
             <Font name="Arial" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="lblCantidadCreditos" layoutX="498.0" layoutY="301.0" text="05">
+      <Label fx:id="lblCantidadCreditos" layoutX="580.0" layoutY="301.0" text="05">
          <font>
             <Font name="Arial" size="27.0" />
          </font>
@@ -83,9 +82,9 @@
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="107.0" layoutY="408.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="92.0" style="-fx-background-radius: 10; -fx-background-color: #034f75;" text="+" textFill="WHITE">
+      <Button layoutX="203.0" layoutY="434.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="77.0" style="-fx-background-radius: 10; -fx-background-color: #034f75;" text="+" textFill="WHITE">
          <font>
-            <Font name="Cambria Bold" size="45.0" />
+            <Font name="Cambria Bold" size="21.0" />
          </font>
       </Button>
    </children>

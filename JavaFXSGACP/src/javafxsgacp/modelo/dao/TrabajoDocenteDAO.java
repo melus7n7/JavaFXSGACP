@@ -39,17 +39,14 @@ public class TrabajoDocenteDAO {
                     "nombreDirector, apellidoPaterno, apellidoMaterno, creditos, hsm " +
                     "FROM trabajodocente " +
                     "INNER JOIN Director ON Director.idDirector = trabajodocente.idDirector " +
-                    "INNER JOIN TipoTrabajoDocente ON TipoTrabajoDocente.idTipoTrabajoDocente = TrabajoDocente.idTipoTrabajoDocente " +    
+                    "INNER JOIN TipoTrabajoDocente ON TipoTrabajoDocente.idTipoTrabajoDocente = TrabajoDocente.idTipoTrabajoDocente " +
                     "INNER JOIN ImparticionExperienciaEducativa ON trabajoDocente.idTrabajoDocente = ImparticionExperienciaEducativa.idtrabajoDocente " +
-                    "INNER JOIN ExperienciaEducativa ON ExperienciaEducativa.NRC = ImparticionExperienciaEducativa.NRC " +
+                    "INNER JOIN ExperienciaEducativa ON ExperienciaEducativa.idExperienciaEducativa = ImparticionExperienciaEducativa.idExperienciaEducativa " +
                     "INNER JOIN ProgramaEducativo ON ExperienciaEducativa.idProgramaEducativo = ProgramaEducativo.idProgramaEducativo " +
-                    "INNER JOIN PeriodoExperienciaEducativa ON PeriodoExperienciaEducativa.NRC = ExperienciaEducativa.NRC " +
-                    "INNER JOIN Periodo ON Periodo.idPeriodo = PeriodoExperienciaEducativa.idPeriodo " +
-                    "INNER JOIN SeccionExperienciaEducativa ON SeccionExperienciaEducativa.NRC = ExperienciaEducativa.NRC " +
-                    "INNER JOIN Seccion ON Seccion.idSeccion = SeccionExperienciaEducativa.idSeccion " +
-                    "INNER JOIN BloqueExperienciaEducativa ON BloqueExperienciaEducativa.NRC = ExperienciaEducativa.NRC " +
-                    "INNER JOIN Bloque ON Bloque.idBloque = BloqueExperienciaEducativa.idBloque " +
-                    "WHERE noPersonal = ? ";
+                    "INNER JOIN Periodo ON Periodo.idPeriodo = imparticionexperienciaeducativa.idPeriodo " +
+                    "INNER JOIN Seccion     ON Seccion.idSeccion = imparticionexperienciaeducativa.idSeccion " +
+                    "INNER JOIN Bloque ON Bloque.idBloque = imparticionexperienciaeducativa.idBloque " +
+                    "WHERE noPersonal = ?";
                 PreparedStatement prepararSentencia = conexionBD.prepareStatement(consulta);
                 prepararSentencia.setString(1, docente.getNoPersonal());
                 ResultSet resultado = prepararSentencia.executeQuery();

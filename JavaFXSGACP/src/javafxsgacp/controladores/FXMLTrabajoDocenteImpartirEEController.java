@@ -77,7 +77,6 @@ public class FXMLTrabajoDocenteImpartirEEController implements Initializable {
         String bloqueSeccion = trabajo.getExperienciaEducativa().getBloque().getNombreBloque() + " - " +
                 trabajo.getExperienciaEducativa().getSeccion().getNombreSeccion();
         lblBloqueSeccion.setText(bloqueSeccion);
-        System.out.println(trabajo.getFechaExpedicionConstancia());
         if(trabajo.getFechaExpedicionConstancia() != null){
             lblTieneConstancia.setText("Con constancia");
         }else{

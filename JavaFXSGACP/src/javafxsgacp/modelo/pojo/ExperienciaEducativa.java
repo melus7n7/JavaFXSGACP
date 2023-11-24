@@ -9,7 +9,7 @@ package javafxsgacp.modelo.pojo;
  * @author sulem
  */
 public class ExperienciaEducativa {
-    private int NRC;
+    private int idExperienciaEducativa;
     private ProgramaEducativo programaEducativo;
     private Periodo periodo;
     private Seccion seccion;
@@ -21,8 +21,8 @@ public class ExperienciaEducativa {
     public ExperienciaEducativa() {
     }
 
-    public int getNRC() {
-        return NRC;
+    public int getIdExperienciaEducativa() {
+        return idExperienciaEducativa;
     }
 
     public ProgramaEducativo getProgramaEducativo() {
@@ -54,8 +54,8 @@ public class ExperienciaEducativa {
     }
     
 
-    public void setNRC(int NRC) {
-        this.NRC = NRC;
+    public void setIdExperienciaEducativa(int idExperienciaEducativa) {
+        this.idExperienciaEducativa = idExperienciaEducativa;
     }
 
     public void setProgramaEducativo(ProgramaEducativo programaEducativo) {
