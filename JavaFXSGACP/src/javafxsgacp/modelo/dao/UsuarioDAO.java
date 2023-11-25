@@ -1,7 +1,7 @@
 /*
 *Autor: Mongeote Tlachy Daniel, Martinez Aguilar Sulem
 *Fecha de creación: 12/11/2023
-*Fecha de modificación: 12/11/2023
+*Fecha de modificación: 19/11/2023
 *Descripción: Clase encargada de la comunicación con la BD, especificamente para manipular la información de los usuarios
 */
 package javafxsgacp.modelo.dao;
@@ -50,29 +50,36 @@ public class UsuarioDAO {
     public static Constantes guardarUsuario(Usuario usuarioNuevo) {
         Constantes respuesta;
         Connection conexionBD = ConexionBD.abrirConexionBD();
-        if (conexionBD != null) {
-            try {
-                String sentencia = "Insert into usuario(noPersonal, fechaNacimiento, nombre, apellidoPaterno, apellidoMaterno, correoElectronico, idTipoUsuario, firmaDigital) " +
-                                    " VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
-                PreparedStatement prepararSentencia =  conexionBD.prepareStatement(sentencia);
-                prepararSentencia.setString(1, usuarioNuevo.getNoPersonal());
-                //prepararSentencia.setString(2, usuarioNuevo.getFechaNacimiento());
-                prepararSentencia.setString(3, usuarioNuevo.getNombre());
-                prepararSentencia.setString(4, usuarioNuevo.getApellidoPaterno());
-                prepararSentencia.setString(5, usuarioNuevo.getApellidoMaterno());
-                prepararSentencia.setString(6, usuarioNuevo.getCorreoElectronico());
-                //prepararSentencia.setInt(7, usuarioNuevo.getTipoUsuario());
-                prepararSentencia.setBytes(8, usuarioNuevo.getFirmaDigital());
-                int filasAfectadas = prepararSentencia.executeUpdate();
-                respuesta = Constantes.OPERACION_EXITOSA;
-                conexionBD.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                respuesta = Constantes.ERROR_CONSULTA;
+            if (conexionBD != null) {
+                try {
+                    String sentenciaCuenta = "INSERT INTO Cuenta(correoElectronico, contraseña, correoElectronicoAlterno) VALUES (?, ?, ?)";
+                    PreparedStatement prepararSentenciaCuenta = conexionBD.prepareStatement(sentenciaCuenta);
+                    prepararSentenciaCuenta.setString(1, usuarioNuevo.getCorreoElectronico());
+                    prepararSentenciaCuenta.setString(2, usuarioNuevo.getContraseña());
+                    prepararSentenciaCuenta.setString(3, usuarioNuevo.getCorreoElectronicoAlterno());
+                    prepararSentenciaCuenta.executeUpdate();
+
+                    String sentenciaUsuario = "INSERT INTO Usuario(noPersonal, fechaNacimiento, nombre, apellidoPaterno, apellidoMaterno, correoElectronico, idTipoUsuario) " +
+                                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement prepararSentenciaUsuario = conexionBD.prepareStatement(sentenciaUsuario);
+                    prepararSentenciaUsuario.setString(1, usuarioNuevo.getNoPersonal());
+                    prepararSentenciaUsuario.setString(2, usuarioNuevo.getFechaNacimiento());
+                    prepararSentenciaUsuario.setString(3, usuarioNuevo.getNombre());
+                    prepararSentenciaUsuario.setString(4, usuarioNuevo.getApellidoPaterno());
+                    prepararSentenciaUsuario.setString(5, usuarioNuevo.getApellidoMaterno());
+                    prepararSentenciaUsuario.setString(6, usuarioNuevo.getCorreoElectronico());
+                    prepararSentenciaUsuario.setInt(7, usuarioNuevo.getIdTipoUsuario());
+                    prepararSentenciaUsuario.executeUpdate();
+
+                    respuesta = Constantes.OPERACION_EXITOSA;
+                    conexionBD.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    respuesta = Constantes.ERROR_CONSULTA;
+                }
+            } else {
+                respuesta = Constantes.ERROR_CONEXION_BD;
             }
-        } else {
-            respuesta = Constantes.ERROR_CONEXION_BD;
-        }
-        return respuesta;
+            return respuesta;
     }
 }

@@ -10,86 +10,99 @@ import java.util.Date;
 
 public class Usuario {
     private String noPersonal;
-    private String correoElectronico;
-    private String contraseña;
-    private TipoUsuario tipoUsuario;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private byte[] firmaDigital;
+    private String correoElectronico;
+    private int idTipoUsuario;
+    private String correoElectronicoAlterno;
+    private String contraseña;
 
     public Usuario() {
     }
-    
-    public String getContraseña() {
-        return contraseña;
-    }
 
-    public void setContraseña(String contraseña) {
+    public Usuario(String noPersonal, String fechaNacimiento, String nombre, String apellidoPaterno, String apellidoMaterno, String correoElectronico, int idTipoUsuario, String correoElectronicoAlterno, String contraseña) {
+        this.noPersonal = noPersonal;
+        this.fechaNacimiento = fechaNacimiento;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correoElectronico = correoElectronico;
+        this.idTipoUsuario = idTipoUsuario;
+        this.correoElectronicoAlterno = correoElectronicoAlterno;
         this.contraseña = contraseña;
     }
+
     public String getNoPersonal() {
         return noPersonal;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public byte[] getFirmaDigital() {
-        return firmaDigital;
-    }
-
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setNoPersonal(String noPersonal) {
         this.noPersonal = noPersonal;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
     }
 
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public void setFirmaDigital(byte[] firmaDigital) {
-        this.firmaDigital = firmaDigital;
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public int getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(int idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
+    }
+
+    public String getCorreoElectronicoAlterno() {
+        return correoElectronicoAlterno;
+    }
+
+    public void setCorreoElectronicoAlterno(String correoElectronicoAlterno) {
+        this.correoElectronicoAlterno = correoElectronicoAlterno;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 }
