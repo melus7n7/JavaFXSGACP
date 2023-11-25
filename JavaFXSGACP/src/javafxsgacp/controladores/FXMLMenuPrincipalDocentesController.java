@@ -40,14 +40,6 @@ public class FXMLMenuPrincipalDocentesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*Por Cambiar Con Inicio Sesion
-            docente = new Usuario();
-            docente.setNoPersonal("59715493");
-            docente.setNombre("Sulem");
-            docente.setApellidoPaterno("Martínez");
-            docente.setApellidoMaterno("Aguilar");
-            mostrarInformacionPantalla();
-        //Fin Del Cambio*/
     }
     
     public void inicializarPantallaDocente(Usuario docente){

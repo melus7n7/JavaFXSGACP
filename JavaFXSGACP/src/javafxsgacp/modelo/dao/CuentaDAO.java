@@ -36,15 +36,13 @@ public class CuentaDAO {
                 while(filasAfectadas.next())
                 {
                     Usuario usuario = new Usuario();
-                    TipoUsuario tipoUsuario = new TipoUsuario();
                     usuario.setCorreoElectronico(filasAfectadas.getString("correoElectronico"));
                     usuario.setContraseña(filasAfectadas.getString("contraseña"));
                     usuario.setNoPersonal(filasAfectadas.getString("noPersonal"));
                     usuario.setNombre(filasAfectadas.getString("nombre"));
                     usuario.setApellidoPaterno(filasAfectadas.getString("apellidoPaterno"));
                     usuario.setApellidoMaterno(filasAfectadas.getString("apellidoMaterno"));
-                    tipoUsuario.setIdTipoUsuario(filasAfectadas.getInt("idTipoUsuario"));
-                    tipoUsuario.setNombreTipo(filasAfectadas.getString("nombreTipo"));
+                    usuario.setIdTipoUsuario(filasAfectadas.getInt("idTipoUsuario"));
                     if(usuario.getContraseña().equals(Contraseña) && usuario.getCorreoElectronico().equals(CorreoElectronico)){
                         return new Pair<>(Constantes.OPERACION_EXITOSA, usuario);                    
                     } else if(usuario.getCorreoElectronico().equals(CorreoElectronico)){

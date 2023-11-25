@@ -78,7 +78,7 @@ public class FXMLInicioSesionController implements Initializable {
                     if(respuestaUsuario.getContraseña().equals(contraseña)){
                         if(respuestaUsuario.getIdTipoUsuario()==1){
                             Utilidades.mostrarDialogoSimple("Usuario encontrado", "Ingresando a menú", Alert.AlertType.INFORMATION);
-                            irMenuPrincipalAdministrativo();
+                            irMenuPrincipalAdministrativo(respuestaUsuario);
                         }else if(respuestaUsuario.getIdTipoUsuario()==2){
                             irMenuPrincipalDocente(respuestaUsuario);
                         }
@@ -106,12 +106,15 @@ public class FXMLInicioSesionController implements Initializable {
         stage.close();
     }
     
-    private void irMenuPrincipalAdministrativo(){
-        Stage stage = (Stage) this.txtFieldCorreoElectronico.getScene().getWindow();  
-        Parent root;
+    private void irMenuPrincipalAdministrativo(Usuario personal){
+        Stage stage = (Stage) this.txtFieldCorreoElectronico.getScene().getWindow();
         try {
-            root = FXMLLoader.load(JavaFXSGACP.class.getResource("vistas/FXMLMenuPrincipal.fxml"));
-            Scene scene = new Scene(root);
+            FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLMenuPrincipal.fxml"));
+            Parent vista = accesoControlador.load();
+            FXMLMenuPrincipalController menuPersonal = accesoControlador.getController();
+            menuPersonal.inicializarMenuAdministradores(personal);
+            
+            Scene scene = new Scene(vista);
             stage.setTitle("Menú Personal Administrativo");
             stage.setScene(scene);
         } catch (IOException ex) {

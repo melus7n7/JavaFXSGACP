@@ -17,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafxsgacp.JavaFXSGACP;
+import javafxsgacp.modelo.pojo.Usuario;
 import javafxsgacp.utilidades.Utilidades;
 
 /**
@@ -25,16 +27,25 @@ import javafxsgacp.utilidades.Utilidades;
  */
 public class FXMLMenuPrincipalController implements Initializable {
 
+    private Usuario personal;
+    @FXML
+    private Label lblNombreDocente;
+    @FXML
+    private Label clickSalir;
+
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-    @FXML
-    private void clickGenerarConstancia(MouseEvent event) {
-        //Ir Inicio Sesion
     }
+    
+    public void inicializarMenuAdministradores(Usuario administrador){
+        String nombreCompleto = administrador.getNombre().toUpperCase() + " " + administrador.getApellidoPaterno().toUpperCase() +
+                " " + administrador.getApellidoMaterno().toUpperCase();
+        lblNombreDocente.setText(nombreCompleto);
+        personal = administrador;
+    }
+
 
     @FXML
     private void clicIrRegistrarDocente(MouseEvent event) {
@@ -45,5 +56,19 @@ public class FXMLMenuPrincipalController implements Initializable {
         escenarioDocentes.initModality(Modality.APPLICATION_MODAL);
         escenarioDocentes.showAndWait();
 
+    }
+
+    @FXML
+    private void clickSalir(MouseEvent event) {
+        Stage stage = (Stage) this.lblNombreDocente.getScene().getWindow();  
+        Parent root;
+        try {
+            root = FXMLLoader.load(JavaFXSGACP.class.getResource("vistas/FXMLInicioSesion.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle("Inicio Sesion");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 }
