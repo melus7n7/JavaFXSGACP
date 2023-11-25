@@ -18,8 +18,8 @@ public class JavaFXSGACP extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLInicioSesion.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLMenuPrincipal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLInicioSesion.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("vistas/FXMLMenuPrincipal.fxml"));
         Scene scene = new Scene(root);
         stage.setResizable(true);
         stage.setScene(scene);
