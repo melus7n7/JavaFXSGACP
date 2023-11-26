@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxsgacp.controladores.FXMLListaController">
+   <children>
+      <Pane prefHeight="524.0" prefWidth="1024.0">
+         <children>
+            <AnchorPane layoutY="-7.0" prefHeight="76.0" prefWidth="1024.0" style="-fx-background-color: #034f75;">
+               <children>
+                  <Label fx:id="lblTitulo" alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="39.0" prefWidth="544.0" text="Lista Docentes" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="70.0">
+                     <font>
+                        <Font name="Futura Md BT Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="22.0" layoutY="17.0" onMouseClicked="#clickRegresarRegistrarTrabajo" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@../recursos/log-out.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TableView fx:id="tblView" layoutX="50.0" layoutY="77.0" prefHeight="370.0" prefWidth="924.0" stylesheets="@../estilos/EstiloTableView.css">
+              <columns>
+                <TableColumn fx:id="tblColumnNombre" editable="false" prefWidth="924.0" text="Docentes" />
+              </columns>
+            </TableView>
+            <Button layoutX="776.0" layoutY="457.0" mnemonicParsing="false" onMouseClicked="#clickContinuar" prefHeight="45.0" prefWidth="198.0" style="-fx-background-radius: 10; -fx-background-color: #08a141;" text="Continuar" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TableView fx:id="tblViewProgramaEducativo" layoutX="51.0" layoutY="78.0" prefHeight="370.0" prefWidth="924.0" stylesheets="@../estilos/EstiloTableView.css">
+              <columns>
+                <TableColumn fx:id="tblColumnProgramaEducativo" prefWidth="923.0" text="Programas Educativos" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tblViewExperienciaEducativa" layoutX="50.0" layoutY="77.0" prefHeight="370.0" prefWidth="924.0" stylesheets="@../estilos/EstiloTableView.css">
+              <columns>
+                <TableColumn fx:id="tblColumnExperienciaEducativa" prefWidth="923.0" text="Experiencias Educativas" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

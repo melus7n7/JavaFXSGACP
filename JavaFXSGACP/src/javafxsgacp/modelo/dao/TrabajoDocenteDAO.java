@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.util.Pair;
 import javafxsgacp.modelo.ConexionBD;
@@ -160,5 +161,60 @@ public class TrabajoDocenteDAO {
             respuesta = Constantes.ERROR_CONEXION_BD;
         }
         return respuesta;
+    }
+    
+    public Constantes guardarTrabajoDocente(String noPersonal, int idExperienciaEducativa, int idSeccion, int idBloque, int idPeriodo){
+        Connection conexion = ConexionBD.abrirConexionBD();
+        if(conexion!=null){
+            try{
+                String consulta = "INSERT INTO TrabajoDocente (fechaRegistro, idTipoTrabajoDocente, noPersonal, idDirector, idFirma) VALUES (CURDATE(),3,?,1,1)";
+                PreparedStatement sentencia= conexion.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);   
+                sentencia.setString(1, noPersonal);      
+                int filasAfectadas  = sentencia.executeUpdate();
+                if(filasAfectadas > 0){
+                    ResultSet generatedKeys = sentencia.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int ultimoIdGenerado = generatedKeys.getInt(1);
+                        Constantes respuesta = guardarImpartirEE(ultimoIdGenerado, idExperienciaEducativa, idSeccion, idBloque, idPeriodo);
+                        return respuesta;
+                    }
+                    return Constantes.OPERACION_VACIA;
+                }else{
+                    return Constantes.OPERACION_VACIA;                    
+                }
+
+            }catch(SQLException ex){
+                return Constantes.ERROR_CONSULTA;
+            }
+        }else{
+            return Constantes.ERROR_CONEXION_BD;
+        }
+    }
+    
+    public Constantes guardarImpartirEE(int idTrabajoDocente, int idExperienciaEducativa, int idSeccion, int idBloque, int idPeriodo){
+        Connection conexion = ConexionBD.abrirConexionBD();
+        if(conexion!=null){
+            try{
+                String consulta = "INSERT INTO imparticionexperienciaeducativa "
+                + "(idTrabajoDocente, idExperienciaEducativa, idSeccion, idBloque, idPeriodo) "
+                + "values(?, ?, ?, ?, ?);";
+                PreparedStatement sentencia= conexion.prepareStatement(consulta);   
+                sentencia.setInt(1, idTrabajoDocente);      
+                sentencia.setInt(2, idExperienciaEducativa);      
+                sentencia.setInt(3, idSeccion);      
+                sentencia.setInt(4, idBloque);      
+                sentencia.setInt(5, idPeriodo);      
+                int filasAfectadas  = sentencia.executeUpdate();
+                if(filasAfectadas > 0){
+                    return Constantes.OPERACION_EXITOSA;
+                }else{
+                    return Constantes.OPERACION_VACIA;                    
+                }
+            }catch(SQLException ex){
+                return Constantes.ERROR_CONSULTA;
+            }
+        }else{
+            return Constantes.ERROR_CONEXION_BD;
+        }
     }
 }

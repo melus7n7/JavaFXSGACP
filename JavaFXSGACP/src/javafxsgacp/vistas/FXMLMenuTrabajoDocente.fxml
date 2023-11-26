@@ -117,7 +117,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="28.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clicImpartirEE" prefHeight="254.0" prefWidth="216.0" style="-fx-background-color: #042437; -fx-background-radius: 25;">
+            <AnchorPane layoutX="28.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickImpartirEE" prefHeight="254.0" prefWidth="216.0" style="-fx-background-color: #042437; -fx-background-radius: 25;">
                <children>
                   <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="55.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="55.0">
                      <image>

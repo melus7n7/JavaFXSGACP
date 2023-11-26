@@ -30,5 +30,10 @@ public class Bloque {
     public void setNombreBloque(String nombreBloque) {
         this.nombreBloque = nombreBloque;
     }
+
+    @Override
+    public String toString() {
+        return nombreBloque;
+    }
     
 }

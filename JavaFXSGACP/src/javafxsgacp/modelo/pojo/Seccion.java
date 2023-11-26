@@ -30,5 +30,9 @@ public class Seccion {
     public void setNombreSeccion(String nombreSeccion) {
         this.nombreSeccion = nombreSeccion;
     }
-    
+
+    @Override
+    public String toString() {
+        return nombreSeccion;
+    }
 }

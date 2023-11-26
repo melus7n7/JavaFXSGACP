@@ -81,7 +81,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane layoutX="349.0" layoutY="274.0" prefHeight="254.0" prefWidth="269.0" style="-fx-background-color: #07004D; -fx-background-radius: 25;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="274.0">
+      <AnchorPane layoutX="349.0" layoutY="274.0" onMouseClicked="#clickIrMenuTrabajoDocente" prefHeight="254.0" prefWidth="269.0" style="-fx-background-color: #07004D; -fx-background-radius: 25;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="274.0">
          <children>
             <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="73.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="108.0" AnchorPane.topAnchor="22.0">
                <image>

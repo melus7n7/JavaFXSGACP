@@ -71,4 +71,20 @@ public class FXMLMenuPrincipalController implements Initializable {
             System.out.println(ex);
         }
     }
+
+    @FXML
+    private void clickIrMenuTrabajoDocente(MouseEvent event) {
+        Stage stage = (Stage) this.lblNombreDocente.getScene().getWindow();
+        try {
+            FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLMenuTrabajoDocente.fxml"));
+            Parent vista = accesoControlador.load();
+            FXMLMenuTrabajoDocenteController menuTrabajosDocentes = accesoControlador.getController();
+            menuTrabajosDocentes.inicializarPantallaTrabajoDocente(personal);
+            Scene scene = new Scene(vista);
+            stage.setTitle("Menú Trabajos Docentes");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }  
+    }
 }

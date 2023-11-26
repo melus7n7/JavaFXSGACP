@@ -18,6 +18,15 @@ public class Usuario {
     private int idTipoUsuario;
     private String correoElectronicoAlterno;
     private String contraseña;
+    private String datosDocente;
+
+    public String getDatosDocente() {
+        return "Numero Personal: "+noPersonal +"\nNombre Completo: "+ nombre + " " + apellidoPaterno + " " + apellidoMaterno;
+    }
+
+    public void setDatosDocente(String datosDocente) {
+        this.datosDocente = datosDocente;
+    }
 
     public Usuario() {
     }
@@ -105,4 +114,10 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellidoPaterno + " " + apellidoMaterno+ " " + noPersonal;
+    }
+    
 }

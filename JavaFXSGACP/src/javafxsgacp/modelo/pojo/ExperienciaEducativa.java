@@ -17,6 +17,15 @@ public class ExperienciaEducativa {
     private String nombre;
     private int creditos;
     private int hsm;
+    private String datosExperienciaEducativa;
+
+    public String getDatosExperienciaEducativa() {
+        return "Experiencia Educativa: "+nombre +"\nCreditos: "+creditos+"\nHoras por semanas al mes: "+hsm;
+    }
+
+    public void setDatosExperienciaEducativa(String datosExperienciaEducativa) {
+        this.datosExperienciaEducativa = datosExperienciaEducativa;
+    }
 
     public ExperienciaEducativa() {
     }

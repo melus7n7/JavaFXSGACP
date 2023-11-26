@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.util.Pair;
 import javafxsgacp.modelo.ConexionBD;
 import javafxsgacp.modelo.pojo.Usuario;
@@ -81,5 +83,37 @@ public class UsuarioDAO {
                 respuesta = Constantes.ERROR_CONEXION_BD;
             }
             return respuesta;
+    }
+    public Pair<Constantes, ArrayList<Usuario>> recuperarDocentes(){
+        Connection conexion = ConexionBD.abrirConexionBD();
+        ArrayList<Usuario> listaDocentes = new ArrayList<Usuario>();
+        
+        if(conexion!=null){
+            try{
+                String consulta = "SELECT noPersonal, nombre, apellidoPaterno, apellidoMaterno from usuario where idTipoUsuario=2;";
+                PreparedStatement sentencia= conexion.prepareStatement(consulta);   
+                ResultSet filasAfectadas  = sentencia.executeQuery();
+                while(filasAfectadas.next())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.setNoPersonal(filasAfectadas.getString("noPersonal"));
+                    usuario.setNombre(filasAfectadas.getString("nombre"));
+                    usuario.setApellidoPaterno(filasAfectadas.getString("apellidoPaterno"));
+                    usuario.setApellidoMaterno(filasAfectadas.getString("apellidoMaterno"));
+                    listaDocentes.add(usuario);
+                    
+                }
+                if(listaDocentes.isEmpty()){
+                    return new Pair<>(Constantes.OPERACION_VACIA, null);
+                }else{
+                    return new Pair<>(Constantes.OPERACION_EXITOSA, listaDocentes);                    
+                }
+
+            }catch(SQLException ex){
+                return new Pair<>(Constantes.ERROR_CONSULTA, null);
+            }
+        }else{
+            return new Pair<>(Constantes.ERROR_CONEXION_BD, null);
+        }
     }
 }

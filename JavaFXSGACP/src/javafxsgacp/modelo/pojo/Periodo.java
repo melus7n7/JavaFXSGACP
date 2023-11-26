@@ -50,6 +50,11 @@ public class Periodo {
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
+
+    @Override
+    public String toString() {
+        return nombrePeriodo + " " + fechaInicio + " " + fechaFinal;
+    }
     
     
 }
