@@ -18,12 +18,6 @@
                   <Font name="Futura Md BT Bold" size="30.0" />
                </font>
             </Label>
-            <Circle fill="WHITE" layoutX="95.0" layoutY="45.0" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
-            <ImageView fitHeight="91.0" fitWidth="71.0" layoutX="28.0" layoutY="-32.0" onMouseClicked="#clicRegresar" pickOnBounds="true" preserveRatio="true" x="32.0" y="42.0">
-               <image>
-                  <Image url="@../recursos/flechaRegresar.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="154.0" layoutY="102.0" prefHeight="454.0" prefWidth="716.0" style="-fx-background-color: #c9eeff;">
@@ -62,7 +56,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <DatePicker fx:id="dpFechaNacimiento" layoutX="92.0" layoutY="235.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/EstiloDatePicker.css" />
+            <DatePicker fx:id="dpFechaNacimiento" layoutX="92.0" layoutY="235.0" prefHeight="25.0" prefWidth="159.0" promptText="28/10/2023" stylesheets="@../estilos/EstiloDatePicker.css" />
             <Label layoutX="43.0" layoutY="305.0" text="Correo Electrónico:">
                <font>
                   <Font size="16.0" />
@@ -81,7 +75,7 @@
             </Label>
             <TextField fx:id="tfCorreoAlterno" layoutX="251.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. menesesrico@uv.mx" />
             <TextField fx:id="tfContrasenia" layoutX="464.0" layoutY="349.0" prefHeight="25.0" prefWidth="174.0" promptText="ej. asnv!#$#%45" />
-            <ComboBox fx:id="cbTipoUsuario" layoutX="348.0" layoutY="235.0" prefHeight="25.0" prefWidth="174.0" stylesheets="@../../../../../../../../../../../OneDrive/Escritorio/Estilo.css">
+            <ComboBox fx:id="cbTipoUsuario" layoutX="348.0" layoutY="235.0" prefHeight="25.0" prefWidth="174.0" stylesheets="@../estilos/EstiloCombobox.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

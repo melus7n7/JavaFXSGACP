@@ -38,23 +38,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="890.0" layoutY="537.0" onMouseClicked="#clickGenerarConstancia" prefHeight="34.0" prefWidth="130.0" style="-fx-background-color: #BA1200; -fx-background-radius: 25;" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
-         <children>
-            <Label alignment="CENTER" layoutX="46.0" prefHeight="35.0" prefWidth="65.0" text="Salir" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="Segoe UI Bold" size="20.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="11.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="11.0">
-               <image>
-                  <Image url="@../recursos/log-out.png" />
-               </image>
-            </ImageView>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </AnchorPane>
       <ImageView fitHeight="135.0" fitWidth="146.0" layoutX="24.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../recursos/iconoRegistrarTrabajoDocente.png" />
@@ -129,6 +112,23 @@
                         <Font name="Segoe UI Bold" size="30.0" />
                      </font>
                   </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane onMouseClicked="#clickSalir" prefHeight="34.0" prefWidth="130.0" style="-fx-background-color: #BA1200; -fx-background-radius: 25;" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="46.0" prefHeight="35.0" prefWidth="65.0" text="Salir" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="11.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="11.0">
+                     <image>
+                        <Image url="@../recursos/log-out.png" />
+                     </image>
+                  </ImageView>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />

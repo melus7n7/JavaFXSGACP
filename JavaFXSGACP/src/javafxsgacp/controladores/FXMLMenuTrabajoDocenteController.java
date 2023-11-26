@@ -41,9 +41,6 @@ public class FXMLMenuTrabajoDocenteController implements Initializable {
         lblNombreAdministrativo.setText(personal.toString());
     }
 
-    @FXML
-    private void clickGenerarConstancia(MouseEvent event) {
-    }
 
     @FXML
     private void clickImpartirEE(MouseEvent event) {
@@ -59,6 +56,23 @@ public class FXMLMenuTrabajoDocenteController implements Initializable {
         } catch (IOException ex) {
             System.out.println(ex);
         }  
+    }
+
+    @FXML
+    private void clickSalir(MouseEvent event) {
+        Stage stage = (Stage) this.lblNombreAdministrativo.getScene().getWindow();
+        try {
+            FXMLLoader accesoControlador = new FXMLLoader(JavaFXSGACP.class.getResource("vistas/FXMLMenuPrincipal.fxml"));
+            Parent vista = accesoControlador.load();
+            FXMLMenuPrincipalController menuPersonal = accesoControlador.getController();
+            menuPersonal.inicializarMenuAdministradores(personal);
+            
+            Scene scene = new Scene(vista);
+            stage.setTitle("Menú Personal Administrativo");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
     
 }

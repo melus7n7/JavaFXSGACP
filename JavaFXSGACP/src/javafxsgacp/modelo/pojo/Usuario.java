@@ -117,7 +117,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return nombre + " " + apellidoPaterno + " " + apellidoMaterno+ " " + noPersonal;
+        return nombre.toUpperCase() + " " + apellidoPaterno.toUpperCase() + " " + apellidoMaterno.toUpperCase();
     }
     
 }

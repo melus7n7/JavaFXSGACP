@@ -66,11 +66,6 @@ public class FXMLCreacionDocenteController implements Initializable {
     }
     
     @FXML
-    private void clicRegresar(MouseEvent event) {
-        cerrarVentana();
-    }
-    
-    @FXML
     private void clicCancelarRegistroDocente(ActionEvent event) {
         cerrarVentana();
     }

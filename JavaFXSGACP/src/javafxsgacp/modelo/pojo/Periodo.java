@@ -53,7 +53,7 @@ public class Periodo {
 
     @Override
     public String toString() {
-        return nombrePeriodo + " " + fechaInicio + " " + fechaFinal;
+        return nombrePeriodo + " (" + fechaInicio + "-" + fechaFinal + ")";
     }
     
     
